@@ -7,7 +7,7 @@ const Navbar = () => {
                 <h1 className="text-[#0048B0] text-2xl font-bold py-4">EduNexus</h1>
                 <div className="flex items-center gap-4">
                     <NavLink to='/'>Home</NavLink>
-                    <NavLink to='/'>All Classes</NavLink>
+                    <NavLink to='/AllClass'>All Classes</NavLink>
                     <NavLink to='/'>Teach on EduNexus</NavLink>
                 </div>
                 <div>
