@@ -25,7 +25,7 @@ const PartnersSection = () => {
     ];
     
     return (
-        <section className="bg-gray-100">
+        <section className="bg-gray-100 pb-10">
             <div className="w-[95%] lg:w-[90%] mx-auto">
 
                 <SectionTitle title="Our Partners" subTitle="We proudly collaborate with leading organizations to enhance learning experiences."></SectionTitle>
