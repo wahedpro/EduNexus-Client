@@ -1,8 +1,11 @@
+import Banner from "../components/Banner";
+import PartnersSection from "../components/PartnersSection";
 
 const HomePage = () => {
     return (
         <div>
-            <h1>this is home page</h1>
+            <Banner></Banner>
+            <PartnersSection></PartnersSection>
         </div>
     );
 };
