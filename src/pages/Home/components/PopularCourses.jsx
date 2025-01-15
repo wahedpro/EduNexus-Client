@@ -49,7 +49,7 @@ const PopularCourses = () => {
     ];
 
     return (
-        <section className="w-[95%] lg:w-[90%] mx-auto pb-32">
+        <section className="w-[95%] lg:w-[90%] mx-auto pb-16">
             <div className="container mx-auto text-center">
                 <SectionTitle title="Popular Courses" subTitle="Explore the top-enrolled courses and boost your skills today!"></SectionTitle>
 
@@ -80,7 +80,7 @@ const PopularCourses = () => {
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <p className="text-2xl font-bold text-[#0048B0]">$ {course.price}</p>
-                                    <button className="bg-[#0048B0] px-10 py-2 text-white">Enroll</button>
+                                    <button className="bg-[#0048B0] px-10 py-2 text-white hover:bg-[#0c5dcee5]">Enroll</button>
                                 </div>
                             </div>
                         </SwiperSlide>
