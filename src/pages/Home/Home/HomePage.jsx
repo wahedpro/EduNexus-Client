@@ -1,3 +1,4 @@
+import useTitle from "../../../hooks/useTitle";
 import Banner from "../components/Banner";
 import Categories from "../components/Categories";
 import FAQ from "../components/FAQ";
@@ -8,6 +9,8 @@ import PopularCourses from "../components/PopularCourses";
 import TotalStatistics from "../components/TotalStatistics";
 
 const HomePage = () => {
+    // for the title
+    useTitle("Home");
     return (
         <div>
             <Banner></Banner>

@@ -1,15 +1,18 @@
-import {useState } from "react";
+import {useContext, useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
-import {NavLink } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
+import {NavLink, useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import useTitle from "../../hooks/useTitle";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const RegisterPage = () => {
     // for the title
     useTitle("RegisterPage");
 
-    // const navigate = useNavigate();
+    const { createUser, userManageProfile} = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -41,20 +44,20 @@ const RegisterPage = () => {
             return;
         }
 
-        // // Register User and Update Profile
-        // createUser(email, password)
-        //     .then((res) => {
-        //         console.log(res.user);
-        //         return manageProfile(name, photoURL);
-        //     })
-        //     .then(() => {
-        //         toast.success("Successfully registered!");
-        //         navigate("/"); // Navigate to home page after successful registration
-        //     })
-        //     .catch((err) => {
-        //         toast.error(err.message || "Failed to register. Please try again.");
-        //         setError(err.message || "Failed to register. Please try again.");
-        //     });
+        // Register User and Update Profile
+        createUser(email, password)
+            .then((res) => {
+                console.log(res.user);
+                return userManageProfile(name, photoURL);
+            })
+            .then(() => {
+                toast.success("Successfully registered!");
+                navigate("/");
+            })
+            .catch((err) => {
+                toast.error(err.message || "Failed to register. Please try again.");
+                setError(err.message || "Failed to register. Please try again.");
+            });
     };
 
     return (
