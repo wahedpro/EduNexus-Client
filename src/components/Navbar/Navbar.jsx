@@ -17,8 +17,8 @@ const Navbar = () => {
     };
 
     const handleDashboardClick = () => {
-        setDropdownOpen(false); // Close the dropdown
-        navigate("/dashboard"); // Navigate to Dashboard
+        setDropdownOpen(false); 
+        navigate("/dashboard");
     };
 
     const toggleDropdown = () => {
@@ -49,7 +49,7 @@ const Navbar = () => {
                 <div className="flex items-center gap-4">
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/AllClass">All Classes</NavLink>
-                    <NavLink to="/">Teach on EduNexus</NavLink>
+                    <NavLink to="/becomeInstructor">Teach on EduNexus</NavLink>
                 </div>
                 <div className="relative" ref={dropdownRef}>
                     {user ? (
@@ -63,6 +63,7 @@ const Navbar = () => {
                             />
                             {dropdownOpen && (
                                 <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-lg rounded-md z-10">
+                                    <h4 className="text-left px-4 py-2 text-sm border-b">{user.displayName}</h4>
                                     <button
                                         onClick={handleDashboardClick} // Close dropdown and navigate
                                         className="block w-full text-left px-4 py-2 hover:bg-gray-100"

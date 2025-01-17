@@ -7,6 +7,7 @@ import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import MyEnrollClass from "../pages/Dashboard/MyEnrollClass/MyEnrollClass";
 import ProfilePage from "../pages/Dashboard/Profile/ProfilePage";
+import BecomeInstructor from "../pages/BecomeInstructor/BecomeInstructor";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
                 path: 'register',
                 element: <RegistrationPage></RegistrationPage>
             },
+            {
+                path: 'becomeInstructor',
+                element: <BecomeInstructor></BecomeInstructor>
+            }
         ]
     },
     {

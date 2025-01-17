@@ -1,6 +1,8 @@
+
 import { NavLink, Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {
+    
     return (
         <div className="flex h-screen bg-gray-100">
         {/* Left Sidebar */}
