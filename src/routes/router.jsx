@@ -4,10 +4,14 @@ import HomePage from "../pages/Home/Home/HomePage";
 import AllClass from "../pages/AllClass/AllClass/AllClass";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
-import DashboardLayout from "../layouts/DashboardLayout";
+import DashboardLayout from "../layouts/StudentDashboardLayout";
 import MyEnrollClass from "../pages/Dashboard/MyEnrollClass/MyEnrollClass";
 import ProfilePage from "../pages/Dashboard/Profile/ProfilePage";
 import BecomeInstructor from "../pages/BecomeInstructor/BecomeInstructor";
+import TeacherDashboardLayout from "../layouts/TeacherDashboardLayout";
+import AddClassPage from "../pages/TeacherDashboard/AddClass/AddClassPage";
+import MyClassPage from "../pages/TeacherDashboard/MyClass/MyClassPage";
+import TeacherProfilePage from "../pages/TeacherDashboard/TeacherProfile/TeacherProfilePage";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +51,24 @@ const router = createBrowserRouter([
             {
                 path:"profile",
                 element: <ProfilePage></ProfilePage>
+            }
+        ]
+    },
+    {
+        path: "teacherDashboard",
+        element: <TeacherDashboardLayout></TeacherDashboardLayout>,
+        children: [
+            {
+                path: "addClass",
+                element: <AddClassPage></AddClassPage>
+            },
+            {
+                path: "myClass",
+                element: <MyClassPage></MyClassPage>
+            },
+            {
+                path:"teacherProfile",
+                element: <TeacherProfilePage></TeacherProfilePage>
             }
         ]
     }

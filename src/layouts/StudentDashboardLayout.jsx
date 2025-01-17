@@ -1,7 +1,7 @@
 
 import { NavLink, Outlet } from "react-router-dom";
 
-const DashboardLayout = () => {
+const StudentDashboardLayout = () => {
     
     return (
         <div className="flex h-screen bg-gray-100">
@@ -31,4 +31,4 @@ const DashboardLayout = () => {
     );
 };
 
-export default DashboardLayout;
+export default StudentDashboardLayout;

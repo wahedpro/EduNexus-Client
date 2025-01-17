@@ -50,6 +50,7 @@ const Navbar = () => {
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/AllClass">All Classes</NavLink>
                     <NavLink to="/becomeInstructor">Teach on EduNexus</NavLink>
+                    <NavLink to="/teacherDashboard">Teacher Dashboard</NavLink>
                 </div>
                 <div className="relative" ref={dropdownRef}>
                     {user ? (

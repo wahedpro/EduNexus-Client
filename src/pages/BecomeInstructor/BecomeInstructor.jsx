@@ -108,7 +108,7 @@ const TeacherApplicationPage = () => {
                     <div className="flex flex-col items-center gap-2 w-full">
                         <input
                             type="text"
-                            defaultValue={user?.displayName}
+                            defaultValue={user.displayName}
                             className="p-2 border rounded-md w-full text-center bg-gray-100"
                             {...register("name", { required: "Name is required" })}
                         />
