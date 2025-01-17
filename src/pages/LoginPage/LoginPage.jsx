@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../provider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
+import axios from "axios";
 
 const LoginPage = () => {
     // for the title
@@ -42,20 +43,31 @@ const LoginPage = () => {
             });
     };
 
-    const googleLogin = () => {
+    const googleLogin = async () => {
         setLoading(true);
-        loginWithGoogle()
-            .then(() => {
-                toast.success("Logged in with Google!");
-                navigate("/");
-            })
-            .catch((err) => {
-                toast.error(err.message || "Google login failed. Please try again.");
-            })
-            .finally(() => {
-                setLoading(false);
+    
+        try {
+            // Log in with Google
+            const result = await loginWithGoogle();
+            const { displayName, photoURL, email } = result.user;
+    
+            // Save user data to the database
+            await axios.post(`http://localhost:3000/users/${email}`, {
+                name: displayName,
+                image: photoURL,
+                email: email,
             });
+    
+            toast.success("Logged in with Google!");
+            navigate("/");
+        } catch (err) {
+            toast.error(err.message || "Google login failed. Please try again.");
+            console.error("Google login error:", err);
+        } finally {
+            setLoading(false);
+        }
     };
+    
 
     return (
         <div className="w-[95%] lg:w-[50%] mx-auto my-10 py-10 border px-5">

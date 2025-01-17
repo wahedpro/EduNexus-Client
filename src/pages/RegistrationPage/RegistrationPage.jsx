@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../../provider/AuthProvider";
+import axios from "axios";
 
 const RegisterPage = () => {
     // for the title
@@ -46,8 +47,16 @@ const RegisterPage = () => {
 
         // Register User and Update Profile
         createUser(email, password)
-            .then((res) => {
+            .then(async res =>  {
                 console.log(res.user);
+                await axios.post(
+                    `http://localhost:3000/users/${email}`,
+                    {
+                        name: name,
+                        image: photoURL,
+                        email: email,
+                    }
+                )
                 return userManageProfile(name, photoURL);
             })
             .then(() => {
