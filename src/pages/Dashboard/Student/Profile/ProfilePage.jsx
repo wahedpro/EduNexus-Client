@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../../../provider/AuthProvider";
+import { AuthContext } from "../../../../provider/AuthProvider";
 
 const ProfilePage = () => {
     const {user} = useContext(AuthContext);

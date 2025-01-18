@@ -10,7 +10,7 @@ const TeacherDashboardLayout = () => {
             <div className="mt-8 w-full px-6 flex flex-col gap-1 bg-gray-100">
                 <NavLink to='/teacherDashboard/addClass' className="bg-blue-600 py-3 text-white px-5">Add Class</NavLink>
                 <NavLink to='/teacherDashboard/myClass' className="bg-blue-600 py-3 text-white px-5">My Class</NavLink>
-                <NavLink to="/teacherDashboard/teacherProfile" className="bg-blue-600 py-3 text-white px-5">Profile</NavLink>
+                <NavLink to="/teacherDashboard/profile" className="bg-blue-600 py-3 text-white px-5">Profile</NavLink>
             </div>
         </div>
 

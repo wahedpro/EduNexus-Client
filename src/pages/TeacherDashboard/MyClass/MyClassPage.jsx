@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import Swal from 'sweetalert2';
+import { Toaster } from "react-hot-toast";
 
 const MyClassPage = () => {
     const [classes, setClasses] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [deleting, setDeleting] = useState(false);
     const navigate = useNavigate();
 
     // Fetch the teacher's classes
@@ -24,23 +24,37 @@ const MyClassPage = () => {
         fetchClasses();
     }, []);
 
-    // Handle delete confirmation
-    const handleDelete = async (id) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this class?");
-        if (!confirmDelete) return;
-
-        setDeleting(true);
-        try {
-            await axios.delete(`http://localhost:3000/classes/${id}`);
-            setClasses((prevClasses) => prevClasses.filter((classItem) => classItem._id !== id));
-            toast.success("Class deleted successfully!");
-        } catch (error) {
-            console.error("Error deleting class:", error);
-            toast.error("Failed to delete the class.");
-        } finally {
-            setDeleting(false);
-        }
+    const handleItemDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Delete from the database
+                fetch(`http://localhost:3000/classes/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        if (data.deletedCount) {
+                            // Update the classes state to reflect the deletion
+                            setClasses((prevClasses) => prevClasses.filter((item) => item._id !== id));
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your item has been deleted.",
+                                icon: "success",
+                            });
+                        }
+                    });
+            }
+        });
     };
+    
 
     const handleSeeDetails = (id) => {
         navigate(`/dashboard/my-class/${id}`);
@@ -90,25 +104,20 @@ const MyClassPage = () => {
 
                         {/* Actions */}
                         <div className="flex gap-2">
-                            
-                            <NavLink to={`/teacherDashboard/classUpdate/${classItem._id}`}
-                            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                            Update</NavLink>
 
-                            <button
-                                onClick={() => handleDelete(classItem._id)}
-                                disabled={deleting}
-                                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-                            >
-                                {deleting ? "Deleting..." : "Delete"}
-                            </button>
+                            <NavLink to={`/teacherDashboard/classUpdate/${classItem._id}`}
+                                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                                Update</NavLink>
+
+                            <button onClick={() => handleItemDelete(classItem._id)} className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                            > Delete </button>
 
                             <button
                                 onClick={() => handleSeeDetails(classItem._id)}
                                 disabled={classItem.status !== "approved"}
                                 className={`px-4 py-2 rounded-md ${classItem.status === "approved"
-                                        ? "bg-green-500 text-white hover:bg-green-600"
-                                        : "bg-gray-400 text-gray-800 cursor-not-allowed"
+                                    ? "bg-green-500 text-white hover:bg-green-600"
+                                    : "bg-gray-400 text-gray-800 cursor-not-allowed"
                                     }`}
                             >
                                 See Details

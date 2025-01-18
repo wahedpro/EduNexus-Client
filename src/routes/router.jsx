@@ -5,14 +5,17 @@ import AllClass from "../pages/AllClass/AllClass/AllClass";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
 import DashboardLayout from "../layouts/StudentDashboardLayout";
-import MyEnrollClass from "../pages/Dashboard/MyEnrollClass/MyEnrollClass";
-import ProfilePage from "../pages/Dashboard/Profile/ProfilePage";
+import MyEnrollClass from "../pages/Dashboard/Student/MyEnrollClass/MyEnrollClass";
+import ProfilePage from "../pages/Dashboard/Student/Profile/ProfilePage";
 import BecomeInstructor from "../pages/BecomeInstructor/BecomeInstructor";
 import TeacherDashboardLayout from "../layouts/TeacherDashboardLayout";
 import AddClassPage from "../pages/TeacherDashboard/AddClass/AddClassPage";
 import MyClassPage from "../pages/TeacherDashboard/MyClass/MyClassPage";
-import TeacherProfilePage from "../pages/TeacherDashboard/TeacherProfile/TeacherProfilePage";
 import UpdateClassPage from "../pages/TeacherDashboard/UpdateClass/UpdateClassPage";
+import AdminDashboardLayout from "../layouts/AdminDashboardLayout";
+import TeacherRequestPage from "../pages/Dashboard/Admin/TeacherRequest/TeacherRequestPage";
+import AllClassesListPage from "../pages/Dashboard/Admin/AllClassesList/AllClassesListPage";
+import UserListPage from "../pages/Dashboard/Admin/UserList/UserListPage";
 
 const router = createBrowserRouter([
     {
@@ -68,14 +71,37 @@ const router = createBrowserRouter([
                 element: <MyClassPage></MyClassPage>
             },
             {
-                path:"teacherProfile",
-                element: <TeacherProfilePage></TeacherProfilePage>
+                path: "profile",
+                element:<ProfilePage></ProfilePage>,
             },
             {
                 path: "classUpdate/:id",
                 element: <UpdateClassPage></UpdateClassPage>,
                 loader: ({ params }) => fetch(`http://localhost:3000/classes/${params.id}`),
             }
+            
+        ]
+    },
+    {
+        path: "admin",
+        element: <AdminDashboardLayout></AdminDashboardLayout>,
+        children:[
+            {
+                path:"teacherRequest",
+                element: <TeacherRequestPage></TeacherRequestPage>
+            },
+            {
+                path:"allClasses",
+                element: <AllClassesListPage></AllClassesListPage>
+            },
+            {
+                path:"userList",
+                element: <UserListPage></UserListPage>
+            },
+            {
+                path:"profile",
+                element: <ProfilePage></ProfilePage>
+            },
             
         ]
     }
