@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -13,7 +13,7 @@ const MyClassPage = () => {
     useEffect(() => {
         const fetchClasses = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/my-classes");
+                const response = await axios.get("http://localhost:3000/classes");
                 setClasses(response.data);
             } catch (error) {
                 console.error("Error fetching classes:", error);
@@ -24,7 +24,27 @@ const MyClassPage = () => {
         fetchClasses();
     }, []);
 
-    
+    // Handle delete confirmation
+    const handleDelete = async (id) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this class?");
+        if (!confirmDelete) return;
+
+        setDeleting(true);
+        try {
+            await axios.delete(`http://localhost:3000/classes/${id}`);
+            setClasses((prevClasses) => prevClasses.filter((classItem) => classItem._id !== id));
+            toast.success("Class deleted successfully!");
+        } catch (error) {
+            console.error("Error deleting class:", error);
+            toast.error("Failed to delete the class.");
+        } finally {
+            setDeleting(false);
+        }
+    };
+
+    const handleSeeDetails = (id) => {
+        navigate(`/dashboard/my-class/${id}`);
+    };
 
     if (loading) {
         return (
@@ -70,12 +90,11 @@ const MyClassPage = () => {
 
                         {/* Actions */}
                         <div className="flex gap-2">
-                            <button
-                                onClick={() => handleUpdate(classItem._id)}
-                                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                            >
-                                Update
-                            </button>
+                            
+                            <NavLink to={`/teacherDashboard/classUpdate/${classItem._id}`}
+                            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                            Update</NavLink>
+
                             <button
                                 onClick={() => handleDelete(classItem._id)}
                                 disabled={deleting}
@@ -83,6 +102,7 @@ const MyClassPage = () => {
                             >
                                 {deleting ? "Deleting..." : "Delete"}
                             </button>
+
                             <button
                                 onClick={() => handleSeeDetails(classItem._id)}
                                 disabled={classItem.status !== "approved"}

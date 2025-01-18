@@ -12,6 +12,7 @@ import TeacherDashboardLayout from "../layouts/TeacherDashboardLayout";
 import AddClassPage from "../pages/TeacherDashboard/AddClass/AddClassPage";
 import MyClassPage from "../pages/TeacherDashboard/MyClass/MyClassPage";
 import TeacherProfilePage from "../pages/TeacherDashboard/TeacherProfile/TeacherProfilePage";
+import UpdateClassPage from "../pages/TeacherDashboard/UpdateClass/UpdateClassPage";
 
 const router = createBrowserRouter([
     {
@@ -69,7 +70,13 @@ const router = createBrowserRouter([
             {
                 path:"teacherProfile",
                 element: <TeacherProfilePage></TeacherProfilePage>
+            },
+            {
+                path: "classUpdate/:id",
+                element: <UpdateClassPage></UpdateClassPage>,
+                loader: ({ params }) => fetch(`http://localhost:3000/classes/${params.id}`),
             }
+            
         ]
     }
 ]);

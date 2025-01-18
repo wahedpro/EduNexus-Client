@@ -12,7 +12,7 @@ const AddClassPage = () => {
 
 
     const handleSubmit = async e => {
-        event.preventDefault();
+        e.preventDefault();
         setLoading(true);
         const form = e.target;
         const title = form.title.value;
