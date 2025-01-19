@@ -16,6 +16,7 @@ import AdminDashboardLayout from "../layouts/AdminDashboardLayout";
 import TeacherRequestPage from "../pages/Dashboard/Admin/TeacherRequest/TeacherRequestPage";
 import AllClassesListPage from "../pages/Dashboard/Admin/AllClassesList/AllClassesListPage";
 import UserListPage from "../pages/Dashboard/Admin/UserList/UserListPage";
+import ClassDetailsPage from "../pages/ClassDetails/ClassDetailsPage";
 
 const router = createBrowserRouter([
     {
@@ -28,7 +29,8 @@ const router = createBrowserRouter([
             },
             {
                 path: 'AllClass',
-                element: <AllClass></AllClass>
+                element: <AllClass></AllClass>,
+                loader: () => fetch('http://localhost:3000/allClasses'),
             },
             {
                 path: 'Login',
@@ -41,6 +43,11 @@ const router = createBrowserRouter([
             {
                 path: 'becomeInstructor',
                 element: <BecomeInstructor></BecomeInstructor>
+            },
+            {
+                path: 'classDetailsPage/:id',
+                element: <ClassDetailsPage></ClassDetailsPage>,
+                loader: ({ params }) => fetch(`http://localhost:3000/classes/${params.id}`),
             }
         ]
     },
