@@ -9,9 +9,9 @@ import MyEnrollClass from "../pages/Dashboard/Student/MyEnrollClass/MyEnrollClas
 import ProfilePage from "../pages/Dashboard/Student/Profile/ProfilePage";
 import BecomeInstructor from "../pages/BecomeInstructor/BecomeInstructor";
 import TeacherDashboardLayout from "../layouts/TeacherDashboardLayout";
-import AddClassPage from "../pages/TeacherDashboard/AddClass/AddClassPage";
-import MyClassPage from "../pages/TeacherDashboard/MyClass/MyClassPage";
-import UpdateClassPage from "../pages/TeacherDashboard/UpdateClass/UpdateClassPage";
+import AddClassPage from "../pages/Dashboard/Teacher/AddClass/AddClassPage";
+import MyClassPage from "../pages/Dashboard/Teacher/MyClass/MyClassPage";
+import UpdateClassPage from "../pages/Dashboard/Teacher/UpdateClass/UpdateClassPage";
 import AdminDashboardLayout from "../layouts/AdminDashboardLayout";
 import TeacherRequestPage from "../pages/Dashboard/Admin/TeacherRequest/TeacherRequestPage";
 import AllClassesListPage from "../pages/Dashboard/Admin/AllClassesList/AllClassesListPage";

@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import { Toaster } from "react-hot-toast";
+import { AuthContext } from "../../../../provider/AuthProvider";
 
 const MyClassPage = () => {
+    const {user} = useContext(AuthContext);
     const [classes, setClasses] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    // Fetch the teacher's classes
     useEffect(() => {
         const fetchClasses = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/classes");
+                const response = await axios.get(`http://localhost:3000/classes?email=${user.email}`);
                 setClasses(response.data);
             } catch (error) {
                 console.error("Error fetching classes:", error);
@@ -21,8 +22,11 @@ const MyClassPage = () => {
                 setLoading(false);
             }
         };
-        fetchClasses();
-    }, []);
+
+        if (user?.email) {
+            fetchClasses(); // Only fetch if email is available
+        }
+    }, [user?.email]);
 
     const handleItemDelete = (id) => {
         Swal.fire({

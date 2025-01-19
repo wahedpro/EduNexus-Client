@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { AuthContext } from "../../../provider/AuthProvider";
+import { AuthContext } from "../../../../provider/AuthProvider";
 
 const AddClassPage = () => {
     const { user } = useContext(AuthContext);
