@@ -100,7 +100,8 @@ const router = createBrowserRouter([
         children:[
             {
                 path:"teacherRequest",
-                element: <TeacherRequestPage></TeacherRequestPage>
+                element: <TeacherRequestPage></TeacherRequestPage>,
+                loader: () => fetch('http://localhost:3000/requests'),
             },
             {
                 path:"allClasses",
