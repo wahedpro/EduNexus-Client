@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { NavLink, useLoaderData } from "react-router-dom";
 
 const ClassDetailsPage = () => {
     const classes = useLoaderData();
@@ -37,7 +37,7 @@ const ClassDetailsPage = () => {
                                 <p className="text-gray-500">{teacherInfo.email}</p>
                             </div>
                         </div>
-                        <button className="px-5 py-2 bg-blue-500">Pay</button>
+                        <NavLink to='/payment' className="px-5 py-2 bg-blue-500">Pay</NavLink>
                     </div>
                 </div>
             </div>

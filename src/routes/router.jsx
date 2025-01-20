@@ -17,6 +17,7 @@ import TeacherRequestPage from "../pages/Dashboard/Admin/TeacherRequest/TeacherR
 import AllClassesListPage from "../pages/Dashboard/Admin/AllClassesList/AllClassesListPage";
 import UserListPage from "../pages/Dashboard/Admin/UserList/UserListPage";
 import ClassDetailsPage from "../pages/ClassDetails/ClassDetailsPage";
+import PaymentPage from "../pages/Payment/PaymentPage";
 
 const router = createBrowserRouter([
     {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
                 path: 'classDetailsPage/:id',
                 element: <ClassDetailsPage></ClassDetailsPage>,
                 loader: ({ params }) => fetch(`http://localhost:3000/classes/${params.id}`),
+            },
+            {
+                path: 'payment',
+                element: <PaymentPage></PaymentPage>
             }
         ]
     },

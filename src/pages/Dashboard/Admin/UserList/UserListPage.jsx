@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 
 const UsersPage = () => {
     const [users, setUsers] = useState([]);
@@ -11,7 +11,7 @@ const UsersPage = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/users?search=${search}`);
+                const response = await axios.get(`http://localhost:3000/allUser`);
                 setUsers(response.data);
             } catch (error) {
                 console.error("Error fetching users:", error);
@@ -20,25 +20,8 @@ const UsersPage = () => {
             }
         };
         fetchUsers();
-    }, [search]); // Fetch users whenever the search input changes
+    }, [search]); 
 
-    // Make a user admin
-    const handleMakeAdmin = async (id) => {
-        try {
-            const response = await axios.put(`http://localhost:3000/users/admin/${id}`);
-            if (response.data.modifiedCount > 0) {
-                Swal.fire("Success!", "User has been made admin.", "success");
-                setUsers((prevUsers) =>
-                    prevUsers.map((user) =>
-                        user._id === id ? { ...user, role: "admin" } : user
-                    )
-                );
-            }
-        } catch (error) {
-            console.error("Error making admin:", error);
-            Swal.fire("Error!", "Failed to make user admin.", "error");
-        }
-    };
 
     // Display loading message while fetching data
     if (loading) {
@@ -94,7 +77,6 @@ const UsersPage = () => {
                                     </button>
                                 ) : (
                                     <button
-                                        onClick={() => handleMakeAdmin(user._id)}
                                         className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                                     >
                                         Make Admin
