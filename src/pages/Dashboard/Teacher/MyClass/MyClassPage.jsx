@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink} from "react-router-dom";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import { Toaster } from "react-hot-toast";
@@ -9,7 +9,6 @@ const MyClassPage = () => {
     const {user} = useContext(AuthContext);
     const [classes, setClasses] = useState([]);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchClasses = async () => {
@@ -59,10 +58,6 @@ const MyClassPage = () => {
         });
     };
     
-
-    const handleSeeDetails = (id) => {
-        navigate(`/dashboard/my-class/${id}`);
-    };
 
     if (loading) {
         return (
@@ -116,8 +111,8 @@ const MyClassPage = () => {
                             <button onClick={() => handleItemDelete(classItem._id)} className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
                             > Delete </button>
 
-                            <button
-                                onClick={() => handleSeeDetails(classItem._id)}
+                            <Link
+                                to={`/teacherDashboard/myClass/${classItem._id}`}
                                 disabled={classItem.status !== "approved"}
                                 className={`px-4 py-2 rounded-md ${classItem.status === "approved"
                                     ? "bg-green-500 text-white hover:bg-green-600"
@@ -125,7 +120,7 @@ const MyClassPage = () => {
                                     }`}
                             >
                                 See Details
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 ))}
