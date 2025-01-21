@@ -6,27 +6,30 @@ import toast from "react-hot-toast";
 const TeacherRequestPage = () => {
     const teacherRequests = useLoaderData();
 
-    const handleApprove = async (id) => {
+    const handleApprove = async (email) => {
         try {
-            await axios.patch(`http://localhost:3000/requests/${id}`, { status: "approved" });
-            toast.success("Request approved successfully!");
-            // Optionally, refresh or update the data here
+            const response = await axios.put(`http://localhost:3000/approve-teacher?email=${email}`);
+            if (response.status === 200) {
+                toast.success("User approved successfully!");
+            }
         } catch (error) {
-            console.error("Error approving request:", error);
-            toast.error("Failed to approve request.");
+            console.error("Error approving user:", error);
+            toast.error("Failed to approve user.");
         }
     };
 
-    const handleReject = async (id) => {
+    const handleReject = async (email) => {
         try {
-            await axios.patch(`http://localhost:3000/requests/${id}`, { status: "rejected" });
-            toast.success("Request rejected successfully!");
-            // Optionally, refresh or update the data here
+            const response = await axios.put(`http://localhost:3000/reject-teacher?email=${email}`);
+            if (response.status === 200) {
+                toast.success("User approved successfully!");
+            }
         } catch (error) {
-            console.error("Error rejecting request:", error);
-            toast.error("Failed to reject request.");
+            console.error("Error approving user:", error);
+            toast.error("Failed to approve user.");
         }
     };
+    
 
     return (
         <div className="max-w-6xl mx-auto mt-10">
@@ -61,10 +64,10 @@ const TeacherRequestPage = () => {
                                 <td className="border px-4 py-2 text-yellow-500 font-semibold">{request.status}</td>
                                 <td className="border px-4 py-2 flex gap-2">
                                     <button
-                                        onClick={() => handleApprove(request._id)}
-                                        disabled={request.status === "approved"}
+                                        onClick={() => handleApprove(request.email)}
+                                        disabled={request.status === "rejected"}
                                         className={`px-4 py-2 rounded-md ${
-                                            request.status === "approved"
+                                            request.status === "rejected"
                                                 ? "bg-gray-400 text-white cursor-not-allowed"
                                                 : "bg-green-500 text-white hover:bg-green-600"
                                         }`}
@@ -72,7 +75,7 @@ const TeacherRequestPage = () => {
                                         Approve
                                     </button>
                                     <button
-                                        onClick={() => handleReject(request._id)}
+                                        onClick={() => handleReject(request.email)}
                                         disabled={request.status === "rejected"}
                                         className={`px-4 py-2 rounded-md ${
                                             request.status === "rejected"
