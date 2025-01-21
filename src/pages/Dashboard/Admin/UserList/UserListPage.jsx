@@ -1,27 +1,33 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import axios from "axios";
-// import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const UsersPage = () => {
     const [users, setUsers] = useState([]);
-    const [search, setSearch] = useState(""); // Search input
-    const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    // Fetch users based on the search term
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3000/allUser`);
-                setUsers(response.data);
-            } catch (error) {
-                console.error("Error fetching users:", error);
-            } finally {
-                setLoading(false);
-            }
+        setLoading(true);
+        const fetchAllItems = async () => {
+            const { data } = await axios.get(`http://localhost:3000/allUser?search=${search}`);
+            setUsers(data); 
+            setLoading(false);
         };
-        fetchUsers();
-    }, [search]); 
+        fetchAllItems();
+    }, [search]);
 
+    const handleMakeAdmin = async (email) => {
+        try {
+            const response = await axios.put(`http://localhost:3000/make-admin?email=${email}`);
+            if (response.status === 200) {
+                toast.success("User approved successfully!");
+            }
+        } catch (error) {
+            console.error("Error approving user:", error);
+            toast.error("Failed to approve user.");
+        }
+    };
 
     // Display loading message while fetching data
     if (loading) {
@@ -36,9 +42,8 @@ const UsersPage = () => {
             <div className="mb-4">
                 <input
                     type="text"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Search by name or email"
+                    onBlur={e => setSearch(e.target.value)}
+                    placeholder="Search by email"
                     className="w-full p-2 border rounded-md"
                 />
             </div>
@@ -77,6 +82,7 @@ const UsersPage = () => {
                                     </button>
                                 ) : (
                                     <button
+                                    onClick={()=>handleMakeAdmin(user.email)}
                                         className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                                     >
                                         Make Admin
