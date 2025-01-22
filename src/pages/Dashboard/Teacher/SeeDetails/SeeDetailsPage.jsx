@@ -1,13 +1,31 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import {useLoaderData, useParams } from "react-router-dom";
+
 
 const SeeDetailsPage = () => {
+    const classes = useLoaderData();
+    const {enrollment, totalAssignment,submission} = classes;
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [assignments, setAssignments] = useState([]);
+
     const { id } = useParams();
 
     const courseId = id; // Course ID from route parameters
+
+    const [ModalOpen, setModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState("");
+
+    const openModal = (description) => {
+        setModalContent(description);
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
+        setModalContent("");
+    };
 
     // Handle form submission
     const handleSubmit = async (e) => {
@@ -39,23 +57,33 @@ const SeeDetailsPage = () => {
         }
     };
 
+    // get the all assignment
+    useEffect(() => {
+        const fetchAssignments = async () => {
+            const response = await fetch(`http://localhost:3000/course/${courseId}/assignments`);
+            const data = await response.json();
+            setAssignments(data);
+        };
+        fetchAssignments();
+    }, [courseId]);
+
     return (
-        <div className="w-[95%] lg:w-[80%] mx-auto mt-10">
+        <div className="w-[95%] mx-auto mt-10">
             <h1 className="text-2xl font-bold text-center mb-6">Course title</h1>
 
             {/* Class Progress Section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div className="bg-white shadow-md p-4 rounded-lg text-center">
                     <h2 className="text-xl font-semibold mb-2">Total Enrollment</h2>
-                    <p className="text-2xl font-bold">10</p>
+                    <p className="text-2xl font-bold">{enrollment}</p>
                 </div>
                 <div className="bg-white shadow-md p-4 rounded-lg text-center">
                     <h2 className="text-xl font-semibold mb-2">Total Assignments</h2>
-                    <p className="text-2xl font-bold">5</p>
+                    <p className="text-2xl font-bold">{totalAssignment}</p>
                 </div>
                 <div className="bg-white shadow-md p-4 rounded-lg text-center">
                     <h2 className="text-xl font-semibold mb-2">Total Submissions</h2>
-                    <p className="text-2xl font-bold">1</p>
+                    <p className="text-2xl font-bold">{submission}</p>
                 </div>
             </div>
 
@@ -68,6 +96,74 @@ const SeeDetailsPage = () => {
                     Create Assignment
                 </button>
             </div>
+
+            <div className="relative">
+            {assignments.length > 0 ? (
+                <div className="overflow-x-auto">
+                    <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                        <thead className="bg-blue-600 text-white">
+                            <tr>
+                                <th className="px-6 py-3 text-left text-sm font-semibold">Title</th>
+                                <th className="px-6 py-3 text-left text-sm font-semibold">Description</th>
+                                <th className="px-6 py-3 text-left text-sm font-semibold">Deadline</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {assignments.map((assignment, index) => (
+                                <tr
+                                    key={assignment._id}
+                                    className={`${
+                                        index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                                    } hover:bg-gray-100 transition-colors`}
+                                >
+                                    <td className="px-6 py-4 text-sm font-medium text-gray-700">
+                                        {assignment.title}
+                                    </td>
+                                    <td className="px-6 py-4 text-sm text-gray-600">
+                                        <div className="line-clamp-1">
+                                            {assignment.description.length > 50 ? (
+                                                <>
+                                                    {assignment.description.slice(0, 50)}...
+                                                    <button
+                                                        onClick={() => openModal(assignment.description)}
+                                                        className="text-blue-600 hover:text-blue-800 ml-2 text-xs font-semibold"
+                                                    >
+                                                        Read More
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                assignment.description
+                                            )}
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4 text-sm text-gray-700">
+                                        {assignment.deadline}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            ) : (
+                <p className="text-center text-gray-500 mt-4">No assignments found.</p>
+            )}
+
+            {/* Modal */}
+            {ModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white rounded-lg shadow-lg w-11/12 sm:w-3/4 md:w-1/2 p-6">
+                        <h2 className="text-xl font-bold mb-4">Assignment Description</h2>
+                        <p className="text-gray-700 mb-6">{modalContent}</p>
+                        <button
+                            onClick={closeModal}
+                            className="bg-blue-600 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-md transition"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
+        </div>
 
             {/* Create Assignment Modal */}
             {isModalOpen && (
