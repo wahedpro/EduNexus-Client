@@ -1,29 +1,58 @@
-import { useState} from "react";
-
+import axios from "axios";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 const SeeDetailsPage = () => {
-
     const [isModalOpen, setIsModalOpen] = useState(false);
-    
+    const { id } = useParams();
+
+    const courseId = id; // Course ID from route parameters
+
+    // Handle form submission
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const title = form.title.value;
+        const description = form.description.value;
+        const deadline = form.deadline.value;
+
+        // Create assignment data object
+        const assignmentData = {
+            classId: courseId, // Include courseId as classId
+            assignment: {
+                title,
+                description,
+                deadline,
+            },
+        };
+
+        try {
+            // Add the assignment to the database
+            await axios.post("http://localhost:3000/assignments", assignmentData);
+            toast.success("Assignment added successfully!");
+        } catch (error) {
+            console.error("Error adding assignment:", error);
+            toast.error("Failed to add assignment. Please try again.");
+        } finally {
+            setIsModalOpen(false); // Close the modal after the process
+        }
+    };
+
     return (
         <div className="w-[95%] lg:w-[80%] mx-auto mt-10">
             <h1 className="text-2xl font-bold text-center mb-6">Course title</h1>
 
             {/* Class Progress Section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                {/* Total Enrollment */}
                 <div className="bg-white shadow-md p-4 rounded-lg text-center">
                     <h2 className="text-xl font-semibold mb-2">Total Enrollment</h2>
                     <p className="text-2xl font-bold">10</p>
                 </div>
-
-                {/* Total Assignments */}
                 <div className="bg-white shadow-md p-4 rounded-lg text-center">
                     <h2 className="text-xl font-semibold mb-2">Total Assignments</h2>
-                    <p className="text-2xl font-bold">2</p>
+                    <p className="text-2xl font-bold">5</p>
                 </div>
-
-                {/* Total Submissions */}
                 <div className="bg-white shadow-md p-4 rounded-lg text-center">
                     <h2 className="text-xl font-semibold mb-2">Total Submissions</h2>
                     <p className="text-2xl font-bold">1</p>
@@ -40,26 +69,12 @@ const SeeDetailsPage = () => {
                 </button>
             </div>
 
-            {/* Assignment List */}
-            <div className="bg-white shadow-md p-4 rounded-lg">
-                <h2 className="text-xl font-semibold mb-4">Assignments</h2>
-                <ul>
-                    {/* {assignments.map((assignment, index) => (
-                        <li key={index} className="mb-4">
-                            <h3 className="font-bold">{assignment.title}</h3>
-                            <p className="text-gray-600">Deadline: {assignment.deadline}</p>
-                            <p>{assignment.description}</p>
-                        </li>
-                    ))} */}
-                </ul>
-            </div>
-
             {/* Create Assignment Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                     <div className="bg-white p-6 rounded-lg w-[90%] md:w-[50%]">
                         <h2 className="text-xl font-semibold mb-4">Create Assignment</h2>
-                        <form >
+                        <form onSubmit={handleSubmit}>
                             <div className="mb-4">
                                 <label className="block mb-1">Title</label>
                                 <input
