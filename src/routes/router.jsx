@@ -19,6 +19,7 @@ import UserListPage from "../pages/Dashboard/Admin/UserList/UserListPage";
 import ClassDetailsPage from "../pages/ClassDetails/ClassDetailsPage";
 import PaymentPage from "../pages/Payment/PaymentPage";
 import SeeDetailsPage from "../pages/Dashboard/Teacher/SeeDetails/SeeDetailsPage";
+import MyEnrollClassDetails from "../pages/Dashboard/Student/MyEnrollClassDetails/MyEnrollClassDetails";
 
 const router = createBrowserRouter([
     {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
             {
                 path:"profile",
                 element: <ProfilePage></ProfilePage>
+            },
+            {
+                path: "/dashboard/MyEnrollClass/:id",
+                element: <MyEnrollClassDetails />
             }
         ]
     },

@@ -1,29 +1,27 @@
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../../provider/AuthProvider";
 
 const MyEnrollClass = () => {
-    const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
+    const [classes, setClasses] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const classes = [
-        {
-            "id": "1",
-            "title": "Web Development Basics",
-            "name": "John Doe",
-            "image": "https://i.ibb.co.com/FsbgZ2s/course.png"
-        },
-        {
-            "id": "2",
-            "title": "Introduction to Digital Marketing",
-            "name": "Jane Smith",
-            "image": "https://i.ibb.co.com/FsbgZ2s/course.png"
-        },
-        {
-            "id": "3",
-            "title": "Graphic Design Fundamentals",
-            "name": "Alice Johnson",
-            "image": "https://i.ibb.co.com/FsbgZ2s/course.png"
-        }
-    ];
-    
+
+    useEffect(() => {
+        const fetchClasses = async () => {
+            const response = await axios.get(`http://localhost:3000/enroll-class?email=${user.email}`);
+            setClasses(response.data);
+            setLoading(false);
+        };
+        fetchClasses();
+    }, []);
+
+    if (loading) {
+        return <p>Loading classes...</p>;
+    }
+
     return (
         <div className="w-[95%] lg:w-[80%] mx-auto my-10">
             <h1 className="text-3xl font-bold text-center mb-8">Enrolled Classes</h1>
@@ -44,15 +42,15 @@ const MyEnrollClass = () => {
                         <h2 className="text-lg font-semibold mb-2 text-center">{classItem.title}</h2>
 
                         {/* Class Creator */}
-                        <p className="text-gray-600 mb-4 text-center">By: {classItem.name}</p>
+                        <p className="text-gray-600 mb-4 text-center">By: {classItem.teacherInfo.name}</p>
 
                         {/* Continue Button */}
-                        <button
-                            onClick={() => navigate(`/class/${classItem.id}`)} // Navigate to class details page
+                        <Link
+                            to={`/dashboard/MyEnrollClass/${classItem._id}`}
                             className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                         >
                             Continue
-                        </button>
+                        </Link>
                     </div>
                 ))}
             </div>
