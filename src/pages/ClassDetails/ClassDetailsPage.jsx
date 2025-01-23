@@ -37,7 +37,10 @@ const ClassDetailsPage = () => {
                                 <p className="text-gray-500">{teacherInfo.email}</p>
                             </div>
                         </div>
-                        <NavLink to='/payment' className="px-5 py-2 bg-blue-500">Pay</NavLink>
+                        <NavLink to={{
+                            pathname: '/payment',
+                        }}
+                            state={{ classes }} className="px-5 py-2 bg-blue-500">Pay</NavLink>
                     </div>
                 </div>
             </div>
