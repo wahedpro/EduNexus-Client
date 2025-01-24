@@ -33,7 +33,7 @@ const router = createBrowserRouter([
             {
                 path: 'AllClass',
                 element: <AllClass></AllClass>,
-                loader: () => fetch('http://localhost:3000/allClasses'),
+                // loader: () => fetch('http://localhost:3000/allClasses'),
             },
             {
                 path: 'Login',

@@ -11,6 +11,7 @@ import TotalStatistics from "../components/TotalStatistics";
 const HomePage = () => {
     // for the title
     useTitle("Home");
+    
     return (
         <div>
             <Banner></Banner>
