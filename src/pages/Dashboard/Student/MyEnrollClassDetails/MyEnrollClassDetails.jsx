@@ -1,37 +1,44 @@
-import { useEffect, useState, useContext } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import axios from "axios";
-import ReactStars from "react-rating-stars-component";
-import { AuthContext } from "../../../../provider/AuthProvider";
-import toast, { Toaster } from "react-hot-toast";
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { useState, useContext } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+import ReactStars from 'react-rating-stars-component';
+import { AuthContext } from '../../../../provider/AuthProvider';
+import toast, { Toaster } from 'react-hot-toast';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
 const ClassAssignmentsPage = () => {
     const title = useLocation();
-    const courseTitle= title.state.title;
+    const courseTitle = title.state.title;
     const { id: classId } = useParams();
     const { user } = useContext(AuthContext);
-    const [assignments, setAssignments] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedAssignment, setSelectedAssignment] = useState(null);
     const [submission, setSubmission] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
     const [rating, setRating] = useState(0);
 
-    useEffect(() => {
-        const fetchAssignments = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3000/class/${classId}/assignments`);
-                setAssignments(response.data);
-            } catch (error) {
-                console.error("Error fetching assignments:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
+    const axiosSecure = useAxiosSecure();
 
-        fetchAssignments();
-    }, [classId]);
+    const { data: assignments, isLoading, error } = useQuery({
+        queryKey: ['assignments', classId],
+        queryFn: () => axiosSecure.get(`/class/${classId}/assignments`).then(res => res.data),
+        onError: (error) => {
+            console.error("Error fetching assignments:", error);
+        }
+    });
+
+    const { mutate: submitAssignment } = useMutation({
+        mutationFn: async () => {
+            await axiosSecure.patch(`/class/${classId}/increment-submission`, {
+                assignmentId: selectedAssignment._id,
+                submission,
+            });
+        },
+        onSuccess: () => {
+            toast.success("Submission successful!");
+            handleCloseModal();
+        },
+    });
 
     const handleOpenModal = (assignment) => {
         setSelectedAssignment(assignment);
@@ -44,13 +51,8 @@ const ClassAssignmentsPage = () => {
         setSubmission("");
     };
 
-    const handleSubmit = async () => {
-        await axios.patch(`http://localhost:3000/class/${classId}/increment-submission`, {
-            assignmentId: selectedAssignment._id,
-            submission,
-        });
-        toast.success("Submission successful!");
-        handleCloseModal();
+    const handleSubmit = () => {
+        submitAssignment();
     };
 
     const handleOpenFeedbackModal = () => {
@@ -62,7 +64,7 @@ const ClassAssignmentsPage = () => {
     };
 
     const handleRatingChange = (newValue) => {
-        setRating(newValue); // Update the rating state
+        setRating(newValue);
     };
 
     const handleFeedbackSubmit = async (e) => {
@@ -81,17 +83,21 @@ const ClassAssignmentsPage = () => {
             rating,
         };
 
-        await axios.post("http://localhost:3000/feedback", feedbackData);
-        toast.success("Feedback submitted successfully!");
+        await axiosSecure.post('/feedback', feedbackData);
+        toast.success('Feedback submitted successfully!');
         handleCloseFeedbackModal();
     };
 
-    if (loading) {
+    if (isLoading) {
         return <p>Loading assignments...</p>;
     }
 
+    if (error) {
+        return <p>Error loading assignments</p>;
+    }
+
     return (
-        <div className="container mx-auto my-10">
+        <div className="container mx-auto ">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold">Class Assignments</h1>
                 <button
@@ -102,7 +108,7 @@ const ClassAssignmentsPage = () => {
                 </button>
             </div>
 
-            <table className="table-auto w-full border-collapse border border-gray-300 shadow-md">
+            <table className="table-auto w-full border-collapse border border-gray-300">
                 <thead className="bg-blue-100">
                     <tr>
                         <th className="border px-4 py-3 text-left">Title</th>
@@ -202,7 +208,7 @@ const ClassAssignmentsPage = () => {
                                     type="submit"
                                     className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
                                 >
-                                    Submit
+                                    Submit Feedback
                                 </button>
                             </div>
                         </form>

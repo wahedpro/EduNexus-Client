@@ -8,7 +8,7 @@ const MyEnrollClass = () => {
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
     const [page, setPage] = useState(1); 
-    const pageSize =1; 
+    const pageSize = 1; 
 
     const { data, isLoading, isError } = useQuery({
         queryKey: ["enroll-class", user?.email, page],
@@ -31,7 +31,6 @@ const MyEnrollClass = () => {
     if (isError) {
         return <p>Failed to load classes. Please try again later.</p>;
     }
-
     const { classes = [], totalPages } = data || {};
 
     return (

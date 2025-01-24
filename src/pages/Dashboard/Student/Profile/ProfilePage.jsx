@@ -1,36 +1,32 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../../../provider/AuthProvider";
-import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const ProfilePage = () => {
-    const { user } = useContext(AuthContext); // User from context
-    const [dbUser, setDbUser] = useState(null); // State to store user details from DB
-    const [loading, setLoading] = useState(true);
+    const { user } = useContext(AuthContext); 
 
-    // Fetch user details from the database by email
-    useEffect(() => {
-        const fetchUserByEmail = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3000/all-user?email=${user.email}`);
-                setDbUser(response.data); // Store DB user details
-            } catch (error) {
-                console.error("Error fetching user:", error.response?.data?.message || error.message);
-            } finally {
-                setLoading(false); // Stop loading
-            }
-        };
+    const axiosSecure = useAxiosSecure();
 
-        if (user?.email) {
-            fetchUserByEmail();
-        }
-    }, [user?.email]);
+    const { data: dbUser, isLoading, isError, error } = useQuery({
+        queryKey: ['user', user?.email], 
+        queryFn: async () => {
+            const response = await axiosSecure.get(`/all-user?email=${user.email}`);
+            return response.data;
+        },
+        enabled: !!user?.email,
+    });
 
-    if (loading) {
+    if (isLoading) {
         return <p className="text-center mt-10">Loading user information...</p>;
     }
 
+    if (isError) {
+        return <p className="text-center mt-10">Error loading user information: {error?.message}</p>;
+    }
+
     return (
-        <div className="w-[95%] lg:w-[50%] mx-auto my-10 py-10 border px-5 shadow-sm">
+        <div className="w-[95%] lg:w-[50%] mx-auto my-10 py-10 border bg-white px-5 shadow-sm">
             <h1 className="text-2xl font-bold text-center mb-8">User Information</h1>
 
             <div className="flex flex-col items-center gap-6">
