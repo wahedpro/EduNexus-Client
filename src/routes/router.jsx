@@ -20,6 +20,7 @@ import ClassDetailsPage from "../pages/ClassDetails/ClassDetailsPage";
 import PaymentPage from "../pages/Payment/PaymentPage";
 import SeeDetailsPage from "../pages/Dashboard/Teacher/SeeDetails/SeeDetailsPage";
 import MyEnrollClassDetails from "../pages/Dashboard/Student/MyEnrollClassDetails/MyEnrollClassDetails";
+import StudentDashboard from "../pages/Dashboard/Student/StudentDashboard/StudentDashboard";
 
 const router = createBrowserRouter([
     {
@@ -33,7 +34,6 @@ const router = createBrowserRouter([
             {
                 path: 'AllClass',
                 element: <AllClass></AllClass>,
-                // loader: () => fetch('http://localhost:3000/allClasses'),
             },
             {
                 path: 'Login',
@@ -62,6 +62,10 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element: <DashboardLayout></DashboardLayout>,
         children: [
+            {
+                path:"/dashboard",
+                element: <StudentDashboard></StudentDashboard>
+            },
             {
                 path:"MyEnrollClass",
                 element: <MyEnrollClass></MyEnrollClass>

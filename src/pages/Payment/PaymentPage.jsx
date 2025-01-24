@@ -6,12 +6,15 @@ import { useLocation } from "react-router-dom";
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const PaymentPage = () => {
     const location = useLocation();
-    const { classes} = location.state || {}; // Access the price from state
+    const { classes } = location.state || {}; // Access the price from state
     return (
-        <div className="w-[40%] mx-auto">
-            <Elements stripe={stripePromise}>
-                <CheckoutForm classes={classes}/>
-            </Elements>
+        <div className="flex flex-col items-center justify-center py-40 gap-5">
+            <p className="text-xl">Complete the Payment information</p>
+            <div className="w-[40%] mx-auto border p-5">
+                <Elements stripe={stripePromise}>
+                    <CheckoutForm classes={classes} />
+                </Elements>
+            </div>
         </div>
     );
 };

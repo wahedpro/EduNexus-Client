@@ -84,7 +84,7 @@ const CheckoutForm = ({ classes }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="flex flex-col justify-center gap-5">
             <CardElement
                 options={{
                     style: {
