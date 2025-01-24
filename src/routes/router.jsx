@@ -21,6 +21,7 @@ import PaymentPage from "../pages/Payment/PaymentPage";
 import SeeDetailsPage from "../pages/Dashboard/Teacher/SeeDetails/SeeDetailsPage";
 import MyEnrollClassDetails from "../pages/Dashboard/Student/MyEnrollClassDetails/MyEnrollClassDetails";
 import StudentDashboard from "../pages/Dashboard/Student/StudentDashboard/StudentDashboard";
+import TeacherDashboard from "../pages/Dashboard/Teacher/TeacherDashboard/TeacherDashboard";
 
 const router = createBrowserRouter([
     {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
         path: "teacherDashboard",
         element: <TeacherDashboardLayout></TeacherDashboardLayout>,
         children: [
+            {
+                path: "/teacherDashboard",
+                element: <TeacherDashboard></TeacherDashboard>
+            },
             {
                 path: "addClass",
                 element: <AddClassPage></AddClassPage>
