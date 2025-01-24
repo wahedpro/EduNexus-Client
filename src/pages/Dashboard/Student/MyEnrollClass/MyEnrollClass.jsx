@@ -46,7 +46,7 @@ const MyEnrollClass = () => {
 
                         {/* Continue Button */}
                         <Link
-                            to={`/dashboard/MyEnrollClass/${classItem._id}`}
+                            to={`/dashboard/MyEnrollClass/${classItem._id}`} state={{ title:classItem.title }}
                             className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                         >
                             Continue

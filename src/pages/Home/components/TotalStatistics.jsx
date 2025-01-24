@@ -1,13 +1,47 @@
+import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const TotalStatistics = () => {
-    // Example data (replace these with dynamic data from your backend)
-    const stats = {
-        totalUsers: 1024,
-        totalClasses: 75,
-        totalEnrollments: 4580
+
+    const axiosSecure = useAxiosSecure();
+
+    // total user
+    const fetchTotalUsers = async () => {
+        const { data } = await axiosSecure.get("/totalUsers");
+        return data.totalUsers;
     };
 
+    const { data: totalUsers} = useQuery({
+        queryKey: ["totalUsers"],
+        queryFn: fetchTotalUsers,
+    });
+
+    // total course
+    const fetchTotalCourses = async () => {
+        const { data } = await axiosSecure.get("/totalCourses");
+        return data.totalCourses;
+    };
+    
+    const { data: totalCourses} = useQuery(
+        {
+            queryKey: ["totalCourses"],
+            queryFn: fetchTotalCourses,
+        }
+    );
+
+    // total enrollment
+    const fetchTotalEnrollments = async () => {
+        const { data } = await axiosSecure.get("/totalEnrollments");
+        return data.totalEnrollments;
+    };
+
+    const { data: totalEnrollments} = useQuery({
+        queryKey: ["totalEnrollments"],
+        queryFn: fetchTotalEnrollments,
+    }
+    );
+    
     return (
         <section className="w-[95%] lg:w-[90%] mx-auto pb-10">
             <SectionTitle
@@ -21,21 +55,20 @@ const TotalStatistics = () => {
                 
                     <div className="bg-white border shadow-sm rounded-lg p-6 text-center">
                         <h3 className="text-2xl font-semibold text-[#0048B0]">Total Users</h3>
-                        <p className="text-3xl font-bold mt-2 text-gray-800">{stats.totalUsers}</p>
+                        <p className="text-3xl font-bold mt-2 text-gray-800">{totalUsers}</p>
                     </div>
                 
                     <div className="bg-white border shadow-sm rounded-lg p-6 text-center">
                         <h3 className="text-2xl font-semibold text-[#0048B0]">Total Classes</h3>
-                        <p className="text-3xl font-bold mt-2 text-gray-800">{stats.totalClasses}</p>
+                        <p className="text-3xl font-bold mt-2 text-gray-800">{totalCourses}</p>
                     </div>
         
                     <div className="bg-white border shadow-sm rounded-lg p-6 text-center">
                         <h3 className="text-2xl font-semibold text-[#0048B0]">Total Enrollments</h3>
-                        <p className="text-3xl font-bold mt-2 text-gray-800">{stats.totalEnrollments}</p>
+                        <p className="text-3xl font-bold mt-2 text-gray-800">{totalEnrollments}</p>
                     </div>
                 </div>
 
-                
                 <div className="w-full lg:w-1/2">
                     <img
                         src="images/online-learning.png"

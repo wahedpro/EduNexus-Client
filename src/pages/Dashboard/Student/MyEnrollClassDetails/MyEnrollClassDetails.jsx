@@ -1,11 +1,13 @@
 import { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import ReactStars from "react-rating-stars-component";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 
 const ClassAssignmentsPage = () => {
+    const title = useLocation();
+    const courseTitle= title.state.title;
     const { id: classId } = useParams();
     const { user } = useContext(AuthContext);
     const [assignments, setAssignments] = useState([]);
@@ -69,11 +71,13 @@ const ClassAssignmentsPage = () => {
         const description = form.description.value;
         const name = user.displayName;
         const photo = user.photoURL;
+        const title = courseTitle;
 
         const feedbackData = {
             name,
             photo,
             description,
+            title,
             rating,
         };
 
@@ -84,10 +88,6 @@ const ClassAssignmentsPage = () => {
 
     if (loading) {
         return <p>Loading assignments...</p>;
-    }
-
-    if (!assignments.length) {
-        return <p>No assignments found for this class.</p>;
     }
 
     return (

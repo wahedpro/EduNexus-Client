@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 const JoinAsTeacher = () => {
@@ -23,13 +24,13 @@ const JoinAsTeacher = () => {
                     <h2 className="text-3xl font-bold text-gray-900">
                         Become an Instructor
                     </h2>
-                    <p className="mt-4 text-gray-700">
+                    <p className="mt-4 text-gray-700 mb-6">
                         Join a global community of educators and inspire students around
                         the world. Share your knowledge and make an impact today.
                     </p>
-                    <button className="mt-6 px-6 py-3 bg-[#0048B0] text-white rounded-md shadow-lg hover:bg-[#126ae6] transition">
+                    <NavLink to='/becomeInstructor' className="mt-6 px-6 py-3 bg-[#0048B0] text-white rounded-md shadow-lg hover:bg-[#126ae6] transition">
                         Start Teaching Now
-                    </button>
+                    </NavLink>
                 </div>
             </div>
         </section>
