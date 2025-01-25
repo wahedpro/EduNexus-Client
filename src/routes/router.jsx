@@ -52,7 +52,7 @@ const router = createBrowserRouter([
             {
                 path: 'classDetailsPage/:id',
                 element: <ClassDetailsPage></ClassDetailsPage>,
-                loader: ({ params }) => fetch(`http://localhost:3000/classes/${params.id}`),
+                loader: ({ params }) => fetch(`https://y-five-lemon.vercel.app/classes/${params.id}`),
             },
             {
                 path: 'payment',
@@ -105,12 +105,12 @@ const router = createBrowserRouter([
             {
                 path: "classUpdate/:id",
                 element: <UpdateClassPage></UpdateClassPage>,
-                loader: ({ params }) => fetch(`http://localhost:3000/classes/${params.id}`),
+                loader: ({ params }) => fetch(`https://y-five-lemon.vercel.app/classes/${params.id}`),
             },
             {
                 path: "myClass/:id",
                 element: <SeeDetailsPage></SeeDetailsPage>,
-                loader: ({ params }) => fetch(`http://localhost:3000/classes/${params.id}`),
+                loader: ({ params }) => fetch(`https://y-five-lemon.vercel.app/classes/${params.id}`),
             }
             
         ]
@@ -122,7 +122,7 @@ const router = createBrowserRouter([
             {
                 path:"teacherRequest",
                 element: <TeacherRequestPage></TeacherRequestPage>,
-                loader: () => fetch('http://localhost:3000/requests'),
+                loader: () => fetch('https://y-five-lemon.vercel.app/requests'),
             },
             {
                 path:"allClasses",

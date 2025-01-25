@@ -48,7 +48,7 @@ const SeeDetailsPage = () => {
 
         try {
             // Add the assignment to the database
-            await axiosSecure.post("http://localhost:3000/assignments", assignmentData);
+            await axiosSecure.post("https://y-five-lemon.vercel.app/assignments", assignmentData);
             toast.success("Assignment added successfully!");
 
             // Update assignments state and increment totalAssignment
@@ -68,7 +68,7 @@ const SeeDetailsPage = () => {
     // Get all assignments
     useEffect(() => {
         const fetchAssignments = async () => {
-            const response = await fetch(`http://localhost:3000/course/${courseId}/assignments`);
+            const response = await fetch(`https://y-five-lemon.vercel.app/course/${courseId}/assignments`);
             const data = await response.json();
             setAssignments(data);
         };

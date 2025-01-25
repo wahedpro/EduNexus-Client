@@ -4,7 +4,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const fetchTeacherRequests = async (page = 1, limit = 10) => {
-    const { data } = await axios.get('http://localhost:3000/requests', {
+    const { data } = await axios.get('https://y-five-lemon.vercel.app/requests', {
         params: { page, limit }
     });
     return data;
@@ -23,7 +23,7 @@ const TeacherRequestPage = () => {
 
     const handleApprove = async (email) => {
         try {
-            const response = await axios.put(`http://localhost:3000/approve-teacher?email=${email}`);
+            const response = await axios.put(`https://y-five-lemon.vercel.app/approve-teacher?email=${email}`);
             if (response.status === 200) {
                 toast.success("User approved successfully!");
                 queryClient.invalidateQueries(['teacherRequests']); // Invalidate cache to refetch data
@@ -36,7 +36,7 @@ const TeacherRequestPage = () => {
 
     const handleReject = async (email) => {
         try {
-            const response = await axios.put(`http://localhost:3000/reject-teacher?email=${email}`);
+            const response = await axios.put(`https://y-five-lemon.vercel.app/reject-teacher?email=${email}`);
             if (response.status === 200) {
                 toast.success("User rejected successfully!");
                 queryClient.invalidateQueries(['teacherRequests']); // Invalidate cache to refetch data

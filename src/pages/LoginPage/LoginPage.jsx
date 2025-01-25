@@ -55,7 +55,7 @@ const LoginPage = () => {
             const { displayName, photoURL, email } = result.user;
     
             // Save user data to the database
-            await axios.post(`http://localhost:3000/users/${email}`, {
+            await axios.post(`https://y-five-lemon.vercel.app/users/${email}`, {
                 name: displayName,
                 image: photoURL,
                 email: email,

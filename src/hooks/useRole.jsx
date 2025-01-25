@@ -8,7 +8,7 @@
 // //     const {data:role, isLoading} = useQuery({
 // //         queryKey:['role', user?.email],
 // //         queryFn:async()=>{
-// //             const {data} = await axios.get(`http://localhost:3000/users/role/${user.email}`);
+// //             const {data} = await axios.get(`https://y-five-lemon.vercel.app/users/role/${user.email}`);
 // //             return data.role;
 // //         }
 // //     })
@@ -29,7 +29,7 @@
 //         queryKey: ['role', user?.email],
 //         queryFn: async () => {
 //             if (!user?.email) return null; // Prevent unnecessary API calls
-//             const { data } = await axios.get(`http://localhost:3000/users/role/${user?.email}`);
+//             const { data } = await axios.get(`https://y-five-lemon.vercel.app/users/role/${user?.email}`);
 //             return data.role;
 //         },
 //         enabled: !!user?.email, // Ensure the query runs only when email exists
@@ -52,7 +52,7 @@ const useRole = () => {
         queryKey: ['role', user?.email],
         queryFn: async () => {
             if (!user?.email) return null;
-            const response = await axios.get(`http://localhost:3000/users/role/${user.email}`);
+            const response = await axios.get(`https://y-five-lemon.vercel.app/users/role/${user.email}`);
             return response.data.role;
         },
         enabled: !!user?.email, // Run query only when email is available

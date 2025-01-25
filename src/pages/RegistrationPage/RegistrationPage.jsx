@@ -50,7 +50,7 @@ const RegisterPage = () => {
             .then(async res =>  {
                 console.log(res.user);
                 await axios.post(
-                    `http://localhost:3000/users/${email}`,
+                    `https://y-five-lemon.vercel.app/users/${email}`,
                     {
                         name: name,
                         image: photoURL,

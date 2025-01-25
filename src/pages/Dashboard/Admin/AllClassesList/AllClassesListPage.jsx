@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const fetchClasses = async (page = 1) => {
-    const response = await axios.get(`http://localhost:3000/all-classes?page=${page}`);
+    const response = await axios.get(`https://y-five-lemon.vercel.app/all-classes?page=${page}`);
     return response.data;
 };
 
@@ -23,7 +23,7 @@ const AllClassesListPage = () => {
 
     const handleApprove = async (id) => {
         try {
-            const response = await axiosSecure.put(`http://localhost:3000/admin/approve-class/${id}`);
+            const response = await axiosSecure.put(`https://y-five-lemon.vercel.app/admin/approve-class/${id}`);
             if (response.data.modifiedCount > 0) {
                 Swal.fire("Success!", "Class has been approved.", "success");
                 // Refetch to get the updated data
@@ -36,7 +36,7 @@ const AllClassesListPage = () => {
 
     const handleReject = async (id) => {
         try {
-            const response = await axiosSecure.put(`http://localhost:3000/admin/reject-class/${id}`);
+            const response = await axiosSecure.put(`https://y-five-lemon.vercel.app/admin/reject-class/${id}`);
             if (response.data.modifiedCount > 0) {
                 Swal.fire("Success!", "Class has been rejected.", "success");
                 // Refetch to get the updated data

@@ -22,7 +22,7 @@
 //         const updatedClass = { title,description, price, image};
 
 //         // Send updated data to the server
-//         fetch(`http://localhost:3000/classes/${classes._id}`, {
+//         fetch(`https://y-five-lemon.vercel.app/classes/${classes._id}`, {
 //             method: 'PUT',
 //             headers: {
 //                 'Content-Type': 'application/json'
@@ -129,7 +129,7 @@ const UpdateClassPage = () => {
     // Mutation for updating the class
     const updateClassMutation = useMutation({
         mutationFn: async (updatedClass) => {
-            const response = await fetch(`http://localhost:3000/classes/${classes._id}`, {
+            const response = await fetch(`https://y-five-lemon.vercel.app/classes/${classes._id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

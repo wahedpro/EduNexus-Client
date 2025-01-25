@@ -14,7 +14,7 @@ const UsersPage = () => {
     useEffect(() => {
         setLoading(true);
         const fetchAllItems = async () => {
-            const { data } = await axios.get(`http://localhost:3000/allUser?search=${search}&page=${currentPage}&limit=${usersPerPage}`);
+            const { data } = await axios.get(`https://y-five-lemon.vercel.app/allUser?search=${search}&page=${currentPage}&limit=${usersPerPage}`);
             setUsers(data.users);
             setTotalUsers(data.totalUsers);
             setLoading(false);
@@ -24,7 +24,7 @@ const UsersPage = () => {
 
     const handleMakeAdmin = async (email, userId) => {
         try {
-            const response = await axios.put(`http://localhost:3000/make-admin?email=${email}`);
+            const response = await axios.put(`https://y-five-lemon.vercel.app/make-admin?email=${email}`);
             if (response.status === 200) {
                 toast.success("User role updated successfully!");
                 setRoleStatus(prevState => ({ ...prevState, [userId]: "admin" })); // Update the role to "admin"
