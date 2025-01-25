@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
@@ -16,6 +16,9 @@ const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     const {
         register,
@@ -32,7 +35,7 @@ const LoginPage = () => {
         loginUser(email, password)
             .then(() => {
                 toast.success("Login successful!");
-                navigate("/");
+                navigate(from,{replace: true});
             })
             .catch((err) => {
                 toast.error(err.message || "Invalid email or password.");

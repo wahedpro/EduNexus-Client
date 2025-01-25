@@ -22,6 +22,7 @@ import SeeDetailsPage from "../pages/Dashboard/Teacher/SeeDetails/SeeDetailsPage
 import MyEnrollClassDetails from "../pages/Dashboard/Student/MyEnrollClassDetails/MyEnrollClassDetails";
 import StudentDashboard from "../pages/Dashboard/Student/StudentDashboard/StudentDashboard";
 import TeacherDashboard from "../pages/Dashboard/Teacher/TeacherDashboard/TeacherDashboard";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'becomeInstructor',
-                element: <BecomeInstructor></BecomeInstructor>
+                element: <PrivateRoute><BecomeInstructor></BecomeInstructor></PrivateRoute>
             },
             {
                 path: 'classDetailsPage/:id',
