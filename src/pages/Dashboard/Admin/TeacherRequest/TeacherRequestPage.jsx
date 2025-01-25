@@ -1,16 +1,32 @@
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
-import { useLoaderData } from "react-router-dom";
-import axios from "axios";
-import toast from "react-hot-toast";
+const fetchTeacherRequests = async (page = 1, limit = 10) => {
+    const { data } = await axios.get('http://localhost:3000/requests', {
+        params: { page, limit }
+    });
+    return data;
+};
 
 const TeacherRequestPage = () => {
-    const teacherRequests = useLoaderData();
+    const [currentPage, setCurrentPage] = useState(1);
+    const limit = 6;
+    const queryClient = useQueryClient(); // Access the query client
+
+    const { data: teacherRequests, isLoading, isError, error } = useQuery({
+        queryKey: ['teacherRequests', currentPage, limit],
+        queryFn: () => fetchTeacherRequests(currentPage, limit),
+        keepPreviousData: true,
+    });
 
     const handleApprove = async (email) => {
         try {
             const response = await axios.put(`http://localhost:3000/approve-teacher?email=${email}`);
             if (response.status === 200) {
                 toast.success("User approved successfully!");
+                queryClient.invalidateQueries(['teacherRequests']); // Invalidate cache to refetch data
             }
         } catch (error) {
             console.error("Error approving user:", error);
@@ -22,14 +38,17 @@ const TeacherRequestPage = () => {
         try {
             const response = await axios.put(`http://localhost:3000/reject-teacher?email=${email}`);
             if (response.status === 200) {
-                toast.success("User approved successfully!");
+                toast.success("User rejected successfully!");
+                queryClient.invalidateQueries(['teacherRequests']); // Invalidate cache to refetch data
             }
         } catch (error) {
-            console.error("Error approving user:", error);
-            toast.error("Failed to approve user.");
+            console.error("Error rejecting user:", error);
+            toast.error("Failed to reject user.");
         }
     };
-    
+
+    if (isLoading) return <div>Loading...</div>;
+    if (isError) return <div>Error: {error.message}</div>;
 
     return (
         <div className="max-w-6xl mx-auto mt-10">
@@ -48,7 +67,7 @@ const TeacherRequestPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {teacherRequests.map((request) => (
+                        {teacherRequests?.map((request) => (
                             <tr key={request._id} className="hover:bg-gray-50">
                                 <td className="border px-4 py-2">{request.name}</td>
                                 <td className="border px-4 py-2">
@@ -90,6 +109,22 @@ const TeacherRequestPage = () => {
                         ))}
                     </tbody>
                 </table>
+            </div>
+
+            <div className="mt-4 flex justify-between">
+                <button 
+                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                >
+                    Previous
+                </button>
+                <button 
+                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                    className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                >
+                    Next
+                </button>
             </div>
         </div>
     );

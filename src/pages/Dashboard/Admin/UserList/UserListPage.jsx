@@ -1,4 +1,4 @@
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -6,26 +6,32 @@ const UsersPage = () => {
     const [users, setUsers] = useState([]);
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);  // Current page number
+    const [totalUsers, setTotalUsers] = useState(0);  // Total users count
+    const [roleStatus, setRoleStatus] = useState({});  // State to track role change for each user
+    const usersPerPage = 5;
 
     useEffect(() => {
         setLoading(true);
         const fetchAllItems = async () => {
-            const { data } = await axios.get(`http://localhost:3000/allUser?search=${search}`);
-            setUsers(data); 
+            const { data } = await axios.get(`http://localhost:3000/allUser?search=${search}&page=${currentPage}&limit=${usersPerPage}`);
+            setUsers(data.users);
+            setTotalUsers(data.totalUsers);
             setLoading(false);
         };
         fetchAllItems();
-    }, [search]);
+    }, [search, currentPage]);
 
-    const handleMakeAdmin = async (email) => {
+    const handleMakeAdmin = async (email, userId) => {
         try {
             const response = await axios.put(`http://localhost:3000/make-admin?email=${email}`);
             if (response.status === 200) {
-                toast.success("User approved successfully!");
+                toast.success("User role updated successfully!");
+                setRoleStatus(prevState => ({ ...prevState, [userId]: "admin" })); // Update the role to "admin"
             }
         } catch (error) {
-            console.error("Error approving user:", error);
-            toast.error("Failed to approve user.");
+            console.error("Error updating user role:", error);
+            toast.error("Failed to update user role.");
         }
     };
 
@@ -33,6 +39,14 @@ const UsersPage = () => {
     if (loading) {
         return <p className="text-center mt-10">Loading users...</p>;
     }
+
+    // Pagination logic
+    const totalPages = Math.ceil(totalUsers / usersPerPage);
+    const handlePageChange = (pageNumber) => {
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+            setCurrentPage(pageNumber);
+        }
+    };
 
     return (
         <div className="w-[95%] lg:w-[80%] mx-auto mt-10">
@@ -64,7 +78,9 @@ const UsersPage = () => {
                         <tr key={user._id} className="text-center">
                             <td className="border px-4 py-2">{user.name}</td>
                             <td className="border px-4 py-2">{user.email}</td>
-                            <td className="border px-4 py-2 capitalize">{user.role || "user"}</td>
+                            <td className="border px-4 py-2 capitalize">
+                                {roleStatus[user._id] || user.role || "user"}
+                            </td>
                             <td className="border px-4 py-2">
                                 <img
                                     src={user.image}
@@ -73,7 +89,7 @@ const UsersPage = () => {
                                 />
                             </td>
                             <td className="border px-4 py-2">
-                                {user.role === "admin" ? (
+                                {user.role === "admin" || roleStatus[user._id] === "admin" ? (
                                     <button
                                         disabled
                                         className="bg-gray-400 text-white px-4 py-2 rounded-md cursor-not-allowed"
@@ -82,7 +98,7 @@ const UsersPage = () => {
                                     </button>
                                 ) : (
                                     <button
-                                    onClick={()=>handleMakeAdmin(user.email)}
+                                        onClick={() => handleMakeAdmin(user.email, user._id)}
                                         className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                                     >
                                         Make Admin
@@ -93,8 +109,28 @@ const UsersPage = () => {
                     ))}
                 </tbody>
             </table>
+
+            {/* Pagination Controls */}
+            <div className="flex justify-center mt-6">
+                <button
+                    className="px-4 py-2 mx-2 border rounded bg-[#0048B0] text-white disabled:bg-slate-400"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                >
+                    Previous
+                </button>
+                <span className="my-auto">Page {currentPage} of {totalPages}</span>
+                <button
+                    className="px-4 py-2 mx-2 border rounded bg-[#0048B0] text-white  disabled:bg-slate-400"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                >
+                    Next
+                </button>
+            </div>
         </div>
     );
 };
 
 export default UsersPage;
+
