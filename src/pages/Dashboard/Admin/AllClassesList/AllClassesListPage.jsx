@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import useTitle from "../../../../hooks/useTitle";
 
 const fetchClasses = async (page = 1) => {
     const response = await axios.get(`https://y-five-lemon.vercel.app/all-classes?page=${page}`);
@@ -10,6 +11,8 @@ const fetchClasses = async (page = 1) => {
 };
 
 const AllClassesListPage = () => {
+
+    useTitle('All Classes Page');
 
     const axiosSecure = useAxiosSecure();
 

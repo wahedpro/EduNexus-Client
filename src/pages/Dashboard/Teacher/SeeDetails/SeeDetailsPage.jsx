@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData, useParams } from "react-router-dom";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import useTitle from "../../../../hooks/useTitle";
 
 const SeeDetailsPage = () => {
+
+    useTitle('See Details Page');
+
     const classes = useLoaderData();
     const { enrollment, submission } = classes; 
     const [isModalOpen, setIsModalOpen] = useState(false);

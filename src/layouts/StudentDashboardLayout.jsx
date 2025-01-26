@@ -14,11 +14,11 @@ const StudentDashboardLayout = () => {
                 {/* Profile Image */}
                 <img
                     className="w-24 h-24 rounded-full border-4 border-gray-200"
-                    src={user.photoURL}
+                    src={user?.photoURL}
                     alt="User Profile"
                 />
                 {/* User Name */}
-                <h2 className="mt-2 text-lg font-semibold">{user.displayName}</h2>
+                <h2 className="mt-2 text-lg font-semibold">{user?.displayName}</h2>
                 {/* Buttons */}
                 <div className="mt-8 w-full px-6 flex flex-col gap-1 bg-gray-100">
                     <NavLink to='/' className="bg-[#0048B0] py-3 text-white px-5">Home</NavLink>

@@ -4,8 +4,12 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import useTitle from "../../hooks/useTitle";
 
 const TeacherApplicationPage = () => {
+
+    useTitle('Teacher Application Page');
+
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();

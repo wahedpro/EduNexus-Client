@@ -2,9 +2,13 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { useLocation } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const PaymentPage = () => {
+
+    useTitle('Payment Page');
+
     const location = useLocation();
     const { classes } = location.state || {}; // Access the price from state
     return (

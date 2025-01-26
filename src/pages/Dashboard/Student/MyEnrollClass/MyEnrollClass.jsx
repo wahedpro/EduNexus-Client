@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import useTitle from "../../../../hooks/useTitle";
 
 const MyEnrollClass = () => {
+
+    useTitle('My Enroll Page');
+
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
     const [page, setPage] = useState(1); 

@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import useTitle from "../../../../hooks/useTitle";
 
 const UsersPage = () => {
+
+    useTitle('List of User');
+
     const [users, setUsers] = useState([]);
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);

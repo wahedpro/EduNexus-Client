@@ -1,6 +1,10 @@
 import { NavLink, useLoaderData } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 
 const ClassDetailsPage = () => {
+
+    useTitle('Class Details Page');
+
     const classes = useLoaderData();
 
     // Destructure the class details

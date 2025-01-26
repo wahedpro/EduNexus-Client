@@ -5,8 +5,12 @@ import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import useTitle from "../../../../hooks/useTitle";
 
 const AddClassPage = () => {
+
+    useTitle('Add Class Page');
+
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const { register, handleSubmit, reset } = useForm(); 

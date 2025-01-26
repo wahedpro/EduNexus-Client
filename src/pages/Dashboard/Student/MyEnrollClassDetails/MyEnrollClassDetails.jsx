@@ -5,8 +5,12 @@ import ReactStars from 'react-rating-stars-component';
 import { AuthContext } from '../../../../provider/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import useTitle from '../../../../hooks/useTitle';
 
 const ClassAssignmentsPage = () => {
+
+    useTitle('Class Details Page');
+
     const title = useLocation();
     const courseTitle = title.state.title;
     const { id: classId } = useParams();

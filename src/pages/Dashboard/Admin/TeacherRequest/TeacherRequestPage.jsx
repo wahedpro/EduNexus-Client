@@ -2,6 +2,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import useTitle from '../../../../hooks/useTitle';
 
 const fetchTeacherRequests = async (page = 1, limit = 10) => {
     const { data } = await axios.get('https://y-five-lemon.vercel.app/requests', {
@@ -11,6 +12,9 @@ const fetchTeacherRequests = async (page = 1, limit = 10) => {
 };
 
 const TeacherRequestPage = () => {
+
+    useTitle('Teacher Request Page');
+
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 6;
     const queryClient = useQueryClient(); // Access the query client

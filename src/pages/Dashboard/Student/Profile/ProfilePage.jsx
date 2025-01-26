@@ -2,8 +2,12 @@ import { useContext } from "react";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import useTitle from "../../../../hooks/useTitle";
 
 const ProfilePage = () => {
+
+    useTitle('Profile Page');
+
     const { user } = useContext(AuthContext); 
 
     const axiosSecure = useAxiosSecure();

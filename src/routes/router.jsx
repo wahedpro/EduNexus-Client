@@ -51,12 +51,12 @@ const router = createBrowserRouter([
             },
             {
                 path: 'classDetailsPage/:id',
-                element: <ClassDetailsPage></ClassDetailsPage>,
+                element: <PrivateRoute><ClassDetailsPage></ClassDetailsPage></PrivateRoute>,
                 loader: ({ params }) => fetch(`https://y-five-lemon.vercel.app/classes/${params.id}`),
             },
             {
                 path: 'payment',
-                element: <PaymentPage></PaymentPage>
+                element: <PrivateRoute><PaymentPage></PaymentPage></PrivateRoute>
             }
         ]
     },
@@ -66,19 +66,19 @@ const router = createBrowserRouter([
         children: [
             {
                 path:"/dashboard",
-                element: <StudentDashboard></StudentDashboard>
+                element: <PrivateRoute><StudentDashboard></StudentDashboard></PrivateRoute>,
             },
             {
                 path:"MyEnrollClass",
-                element: <MyEnrollClass></MyEnrollClass>
+                element: <PrivateRoute><MyEnrollClass></MyEnrollClass></PrivateRoute>
             },
             {
                 path:"profile",
-                element: <ProfilePage></ProfilePage>
+                element: <PrivateRoute><ProfilePage></ProfilePage></PrivateRoute>
             },
             {
                 path: "/dashboard/MyEnrollClass/:id",
-                element: <MyEnrollClassDetails />
+                element: <PrivateRoute><MyEnrollClassDetails/></PrivateRoute>
             }
         ]
     },
@@ -88,28 +88,28 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/teacherDashboard",
-                element: <TeacherDashboard></TeacherDashboard>
+                element: <PrivateRoute><TeacherDashboard></TeacherDashboard></PrivateRoute>
             },
             {
                 path: "addClass",
-                element: <AddClassPage></AddClassPage>
+                element: <PrivateRoute><AddClassPage></AddClassPage></PrivateRoute>
             },
             {
                 path: "myClass",
-                element: <MyClassPage></MyClassPage>
+                element: <PrivateRoute><MyClassPage></MyClassPage></PrivateRoute>
             },
             {
                 path: "profile",
-                element:<ProfilePage></ProfilePage>,
+                element:<PrivateRoute><ProfilePage></ProfilePage></PrivateRoute>,
             },
             {
                 path: "classUpdate/:id",
-                element: <UpdateClassPage></UpdateClassPage>,
+                element: <PrivateRoute><UpdateClassPage></UpdateClassPage></PrivateRoute>,
                 loader: ({ params }) => fetch(`https://y-five-lemon.vercel.app/classes/${params.id}`),
             },
             {
                 path: "myClass/:id",
-                element: <SeeDetailsPage></SeeDetailsPage>,
+                element: <PrivateRoute><SeeDetailsPage></SeeDetailsPage></PrivateRoute>,
                 loader: ({ params }) => fetch(`https://y-five-lemon.vercel.app/classes/${params.id}`),
             }
             
@@ -121,20 +121,20 @@ const router = createBrowserRouter([
         children:[
             {
                 path:"teacherRequest",
-                element: <TeacherRequestPage></TeacherRequestPage>,
+                element: <PrivateRoute><TeacherRequestPage></TeacherRequestPage></PrivateRoute>,
                 loader: () => fetch('https://y-five-lemon.vercel.app/requests'),
             },
             {
                 path:"allClasses",
-                element: <AllClassesListPage></AllClassesListPage>
+                element: <PrivateRoute><AllClassesListPage></AllClassesListPage></PrivateRoute>
             },
             {
                 path:"userList",
-                element: <UserListPage></UserListPage>
+                element: <PrivateRoute><UserListPage></UserListPage></PrivateRoute>
             },
             {
                 path:"profile",
-                element: <ProfilePage></ProfilePage>
+                element: <PrivateRoute><ProfilePage></ProfilePage></PrivateRoute>
             },
             
         ]

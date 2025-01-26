@@ -5,8 +5,12 @@ import { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../../../provider/AuthProvider";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import useTitle from "../../../../hooks/useTitle";
 
 const MyClassPage = () => {
+
+    useTitle('My Class Page');
+
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient(); // Access the QueryClient instance

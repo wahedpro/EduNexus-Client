@@ -1,6 +1,10 @@
+import useTitle from "../../../../hooks/useTitle";
 
 
 const TeacherDashboard = () => {
+
+    useTitle('Teacher Dashboard');
+
     return (
         <div>
             <div className="flex items-center justify-center h-screen">
