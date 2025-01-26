@@ -5,6 +5,7 @@ import "swiper/css/pagination";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { NavLink } from "react-router-dom";
 
 const PopularCourses = () => {
 
@@ -54,7 +55,7 @@ const PopularCourses = () => {
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <p className="text-2xl font-bold text-[#0048B0]">$ {course.price}</p>
-                                    <button className="bg-[#0048B0] px-10 py-2 text-white hover:bg-[#0c5dcee5]">Enroll</button>
+                                    <NavLink to={`/classDetailsPage/${course._id}`} className="bg-[#0048B0] px-10 py-2 text-white hover:bg-[#0c5dcee5]">Enroll</NavLink>
                                 </div>
                             </div>
                         </SwiperSlide>

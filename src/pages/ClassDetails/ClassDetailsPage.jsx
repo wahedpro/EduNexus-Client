@@ -12,7 +12,7 @@ const ClassDetailsPage = () => {
 
     return (
         <div className="max-w-4xl mx-auto bg-white my-10 border p-2">
-            <div className="flex gap-5">
+            <div className="lg:flex gap-5">
                 {/* Class Image */}
                 <div className="w-full mb-6">
                     <img

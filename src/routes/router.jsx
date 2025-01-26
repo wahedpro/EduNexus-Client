@@ -23,6 +23,7 @@ import MyEnrollClassDetails from "../pages/Dashboard/Student/MyEnrollClassDetail
 import StudentDashboard from "../pages/Dashboard/Student/StudentDashboard/StudentDashboard";
 import TeacherDashboard from "../pages/Dashboard/Teacher/TeacherDashboard/TeacherDashboard";
 import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
             {
                 path: 'payment',
                 element: <PrivateRoute><PaymentPage></PaymentPage></PrivateRoute>
+            },
+            {
+                path: '*',
+                element: <ErrorPage></ErrorPage>
             }
         ]
     },
@@ -79,6 +84,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/MyEnrollClass/:id",
                 element: <PrivateRoute><MyEnrollClassDetails/></PrivateRoute>
+            },
+            {
+                path: '*',
+                element: <ErrorPage></ErrorPage>
             }
         ]
     },
@@ -111,6 +120,10 @@ const router = createBrowserRouter([
                 path: "myClass/:id",
                 element: <PrivateRoute><SeeDetailsPage></SeeDetailsPage></PrivateRoute>,
                 loader: ({ params }) => fetch(`https://y-five-lemon.vercel.app/classes/${params.id}`),
+            },
+            {
+                path: '*',
+                element: <ErrorPage></ErrorPage>
             }
             
         ]
@@ -136,7 +149,10 @@ const router = createBrowserRouter([
                 path:"profile",
                 element: <PrivateRoute><ProfilePage></ProfilePage></PrivateRoute>
             },
-            
+            {
+                path: '*',
+                element: <ErrorPage></ErrorPage>
+            }
         ]
     }
 ]);
