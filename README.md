@@ -54,6 +54,88 @@ Welcome to **EduNexus**, a comprehensive learning platform that connects student
 - **Backend**: Node.js, Express.js  
 - **Database**: MongoDB  
 - **Authentication**: Firebase  
-- **Deployment**: Netlify (Frontend), Render (Backend)
+- **Deployment**: Netlify (Frontend), Vercel (Backend)
 
 ---
+
+### 📦 Dependencies
+
+```json
+"@smastrom/react-rating": "^1.5.0",
+"@stripe/react-stripe-js": "^3.1.1",
+"@stripe/stripe-js": "^5.5.0",
+"@tanstack/react-query": "^5.64.2",
+"axios": "^1.7.9",
+"firebase": "^11.1.0",
+"localforage": "^1.10.0",
+"match-sorter": "^8.0.0",
+"react": "^18.3.1",
+"react-dom": "^18.3.1",
+"react-hook-form": "^7.54.2",
+"react-hot-toast": "^2.5.1",
+"react-icons": "^5.4.0",
+"react-rating-stars-component": "^2.2.0",
+"react-router-dom": "^7.1.1",
+"sort-by": "^1.2.0",
+"sweetalert2": "^11.15.10",
+"swiper": "^11.2.1"
+```
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally:
+
+### 1️⃣ Clone the Repository
+```sh
+git clone https://github.com/yourusername/edunexus.git
+cd edunexus
+```
+
+### 2️⃣ Install Dependencies
+```sh
+npm install
+```
+
+### 3️⃣ Set Up Environment Variables
+Create a `.env` file in the root directory and add the necessary environment variables:
+```env
+REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+REACT_APP_FIREBASE_PROJECT_ID=your_firebase_project_id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+REACT_APP_FIREBASE_APP_ID=your_firebase_app_id
+REACT_APP_STRIPE_PUBLIC_KEY=your_stripe_public_key
+```
+
+### 4️⃣ Start the Development Server
+```sh
+npm run dev
+```
+This will start the frontend on `http://localhost:5173/` (default Vite dev server port).
+
+### 5️⃣ Start the Backend Server
+Navigate to the backend directory and run:
+```sh
+cd backend
+npm install
+npm start
+```
+The backend will run on `http://localhost:5000/`.
+
+---
+
+## 📜 License
+This project is licensed under the MIT License.
+
+---
+
+## 🤝 Contributing
+Feel free to fork this repository and submit pull requests. Contributions are welcome!
+
+---
+
+## 📧 Contact
+For any queries, contact: [wahedulislamcse@gmail.com](mailto:wahedulislamcse@gmail.com)
