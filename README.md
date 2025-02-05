@@ -103,13 +103,6 @@ npm install
 npm run dev
 ```
 This will start the frontend on `http://localhost:5173/` (default Vite dev server port).
-
-### 4️⃣ Start the Backend Server
-Navigate to the backend directory and run:
-```sh
-
-npm start
-
 ---
 
 ## 📜 License
