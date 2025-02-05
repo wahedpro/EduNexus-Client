@@ -89,7 +89,7 @@ Follow these steps to run the project locally:
 
 ### 1️⃣ Clone the Repository
 ```sh
-git clone https://github.com/yourusername/edunexus.git
+git clone https://github.com/wahedpro/EduNexus-Client.git
 cd edunexus
 ```
 
@@ -98,32 +98,17 @@ cd edunexus
 npm install
 ```
 
-### 3️⃣ Set Up Environment Variables
-Create a `.env` file in the root directory and add the necessary environment variables:
-```env
-REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
-REACT_APP_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
-REACT_APP_FIREBASE_PROJECT_ID=your_firebase_project_id
-REACT_APP_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
-REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
-REACT_APP_FIREBASE_APP_ID=your_firebase_app_id
-REACT_APP_STRIPE_PUBLIC_KEY=your_stripe_public_key
-```
-
-### 4️⃣ Start the Development Server
+### 3️⃣ Start the Development Server
 ```sh
 npm run dev
 ```
 This will start the frontend on `http://localhost:5173/` (default Vite dev server port).
 
-### 5️⃣ Start the Backend Server
+### 4️⃣ Start the Backend Server
 Navigate to the backend directory and run:
 ```sh
-cd backend
-npm install
+
 npm start
-```
-The backend will run on `http://localhost:5000/`.
 
 ---
 
