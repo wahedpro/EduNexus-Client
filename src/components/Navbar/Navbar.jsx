@@ -50,16 +50,31 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className="w-full px-4 lg:px-10 mx-auto">
+        <div className="w-full px-4 lg:px-16 mx-auto bg-white border-b-2 fixed z-50">
             <div className="flex items-center justify-between py-4">
                 <NavLink to="/" className="text-[#0048B0] text-xl lg:text-2xl font-bold">
                     EduNexus
                 </NavLink>
                 {/* Desktop Links */}
                 <div className="hidden lg:flex items-center gap-4">
-                    <NavLink to="/" className="hover:text-[#0048B0]">Home</NavLink>
-                    <NavLink to="/AllClass" className="hover:text-[#0048B0]">All Classes</NavLink>
-                    <NavLink to="/becomeInstructor" className="hover:text-[#0048B0]">Teach on EduNexus</NavLink>
+                    <NavLink to="/"
+                        className={({ isActive }) =>
+                            isActive
+                                ? "text-[#0048B0] font-semibold border-b-2 border-[#0048B0] dark:text-white"
+                                : "text-gray-700 hover:text-[#0048B0] dark:text-white"
+                        }>Home</NavLink>
+                    <NavLink to="/AllClass" 
+                    className={({ isActive }) =>
+                        isActive
+                            ? "text-[#0048B0] font-semibold border-b-2 border-[#0048B0] dark:text-white"
+                            : "text-gray-700 hover:text-[#0048B0] dark:text-white"
+                    }>All Classes</NavLink>
+                    <NavLink to="/becomeInstructor" 
+                    className={({ isActive }) =>
+                        isActive
+                            ? "text-[#0048B0] font-semibold border-b-2 border-[#0048B0] dark:text-white"
+                            : "text-gray-700 hover:text-[#0048B0] dark:text-white"
+                    }>Teach on EduNexus</NavLink>
                 </div>
                 {/* Mobile Hamburger Menu */}
                 <div className="lg:hidden">
@@ -101,7 +116,7 @@ const Navbar = () => {
                         <div>
                             <NavLink
                                 to="/Login"
-                                className="border border-[#0048B0] px-5 py-2 text-[#0048B0] hover:bg-gray-100"
+                                className="border bg-[#0048B0] border-[#0048B0] px-5 py-2 text-white hover:bg-white hover:text-black"
                             >
                                 Sign In
                             </NavLink>

@@ -108,7 +108,7 @@ const AllClass = () => {
     };
 
     return (
-        <section className="bg-gray-50">
+        <section className="bg-gray-50 py-16">
             <div className="w-[95%] lg:w-[90%] mx-auto">
                 <SectionTitle
                     title="All Classes"

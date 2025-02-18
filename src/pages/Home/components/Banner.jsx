@@ -6,7 +6,7 @@ import "swiper/css/autoplay";
 
 const Banner = () => {
     return (
-        <div className="py-2 max-w-full">
+        <div className="pb-2 py-16 max-w-full">
             <Swiper
                 modules={[Pagination, Autoplay]}
                 spaceBetween={30}
