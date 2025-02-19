@@ -70,10 +70,10 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="w-[95%] lg:w-[50%] shadow-sm mx-auto my-10 py-10 border px-5">
-            <h1 className="text-2xl font-semibold text-center mb-5">Registration</h1>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-                <label>Name</label>
+        <div className="w-[95%] lg:w-[50%] shadow-sm mx-auto py-24 px-5">
+            <h1 className="text-2xl font-semibold text-center mb-5 dark:text-white">Registration</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col border p-3">
+                <label className="dark:text-white">Name</label>
                 <input
                     className="p-2 border mb-5"
                     type="text"
@@ -82,7 +82,7 @@ const RegisterPage = () => {
                 />
                 {errors.name && <p className="text-red-500">{errors.name.message}</p>}
 
-                <label>Email</label>
+                <label className="dark:text-white">Email</label>
                 <input
                     className="p-2 border mb-5"
                     type="email"
@@ -97,7 +97,7 @@ const RegisterPage = () => {
                 />
                 {errors.email && <p className="text-red-500">{errors.email.message}</p>}
 
-                <label>Photo URL</label>
+                <label className="dark:text-white">Photo URL</label>
                 <input
                     className="p-2 border mb-5"
                     type="text"
@@ -106,7 +106,7 @@ const RegisterPage = () => {
                 />
                 {errors.photoURL && <p className="text-red-500">{errors.photoURL.message}</p>}
 
-                <label>Password</label>
+                <label className="dark:text-white">Password</label>
                 <div className="relative">
                     <input
                         className="p-3 border mb-5 w-full"
@@ -130,7 +130,7 @@ const RegisterPage = () => {
                 </button>
             </form>
             {error && <p className="text-red-500 mb-5">{error}</p>}
-            <p className="text-center">
+            <p className="text-center dark:text-white py-2">
                 Already have an account?{" "}
                 <NavLink to="/login" className="text-blue-400">
                     Login Now
