@@ -144,7 +144,7 @@ const TeacherApplicationPage = () => {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+                        className="bg-[#0048B0] text-white px-4 py-2 rounded-md hover:bg-blue-500"
                     >
                         Submit for Review
                     </button>
