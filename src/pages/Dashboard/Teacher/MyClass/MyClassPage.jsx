@@ -79,16 +79,16 @@ const MyClassPage = () => {
     return (
         <div>
             <h1 className="text-3xl font-bold text-center mb-4">My Classes</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
                 {classes.map((classItem) => (
                     <div
                         key={classItem._id}
-                        className="bg-white border shadow-md rounded-lg p-1 flex flex-col"
+                        className="bg-white border shadow-md -lg p-1 flex flex-col"
                     >
                         <img
                             src={classItem.image}
                             alt={classItem.title}
-                            className="w-52 h-40 object-cover rounded-md"
+                            className="h-48 object-cover rounded-md"
                         />
                         <h2 className="text-lg font-semibold">{classItem.title}</h2>
                         <p className="text-gray-600">
@@ -106,20 +106,20 @@ const MyClassPage = () => {
                         <div className="flex gap-2 items-center justify-between">
                             <NavLink
                                 to={`/teacherDashboard/classUpdate/${classItem._id}`}
-                                className="bg-blue-500 text-sm text-white px-2 py-2 rounded-md hover:bg-blue-600"
+                                className="bg-blue-500 text-sm text-white lg:px-3 px-5 lg:py-2 py-3 rounded-md hover:bg-blue-600"
                             >
                                 Update
                             </NavLink>
                             <button
                                 onClick={() => handleItemDelete(classItem._id)}
-                                className="bg-red-500 text-sm text-white px-2 py-2 rounded-md hover:bg-red-600"
+                                className="bg-red-500 text-sm text-white lg:px-3 px-5 lg:py-2 py-3 rounded-md hover:bg-red-600"
                             >
                                 Delete
                             </button>
                             <Link
                                 to={`/teacherDashboard/myClass/${classItem._id}`}
                                 disabled={classItem.status !== "approved"}
-                                className={`px-2 py-2 text-sm rounded-md ${
+                                className={`lg:px-3 px-5 lg:py-2 py-3 text-sm rounded-md ${
                                     classItem.status === "approved"
                                         ? "bg-green-500 text-white hover:bg-green-600"
                                         : "bg-gray-400 text-gray-800 cursor-not-allowed"
