@@ -87,22 +87,10 @@ const Navbar = () => {
                         }>Teach on EduNexus</NavLink>
                 </div>
                 {/* Mobile Hamburger Menu */}
-                <div className="lg:hidden">
-                    <button onClick={() => setMobileMenuOpen((prev) => !prev)} className="text-[#0048B0]">
-                        {mobileMenuOpen ? <IoIosClose size={24} /> : <IoMdMenu size={24} />}
-                    </button>
-                    {mobileMenuOpen && (
-                        <div className="absolute top-16 left-0 w-full bg-white shadow-lg rounded-lg z-10">
-                            <NavLink to="/" className="block px-4 py-2 hover:bg-gray-100">Home</NavLink>
-                            <NavLink to="/AllClass" className="block px-4 py-2 hover:bg-gray-100">All Classes</NavLink>
-                            <NavLink to="/becomeInstructor" className="block px-4 py-2 hover:bg-gray-100">Teach on EduNexus</NavLink>
-                        </div>
-                    )}
-                </div>
-                <div className="relative flex items-center gap-3" ref={dropdownRef}>
+                <div className="lg:hidden flex items-center gap-2">
                     <button
                         onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                        className="p-2 bg-gray-200 dark:bg-gray-800 rounded hidden lg:block"
+                        className="p-2 bg-gray-200 dark:bg-gray-800 rounded lg:block"
                     >
                         {theme === "light" ? "🌙" : "☀️"}
                     </button>
@@ -127,6 +115,56 @@ const Navbar = () => {
                                     </button>
                                 </div>
                             )}
+                        </div>
+                    ) : (
+                        <div>
+                            <NavLink
+                                to="/Login"
+                                className="border bg-[#0048B0] border-[#0048B0] px-5 py-2 text-white hover:bg-white hover:text-black"
+                            >
+                                Sign In
+                            </NavLink>
+                        </div>
+                    )}
+                    <button onClick={() => setMobileMenuOpen((prev) => !prev)} className="text-[#0048B0]">
+                        {mobileMenuOpen ? <IoIosClose size={24} /> : <IoMdMenu size={24} />}
+                    </button>
+                    {mobileMenuOpen && (
+                        <div className="absolute top-16 left-0 w-full bg-white shadow-lg rounded-lg z-10">
+                            <NavLink to="/" className="block px-4 py-2 hover:bg-gray-100">Home</NavLink>
+                            <NavLink to="/AllClass" className="block px-4 py-2 hover:bg-gray-100">All Classes</NavLink>
+                            <NavLink to="/becomeInstructor" className="block px-4 py-2 hover:bg-gray-100">Teach on EduNexus</NavLink>
+                        </div>
+                    )}
+                </div>
+                <div className="relative  lg:flex hidden items-center gap-3" >
+                    <button
+                        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                        className="p-2 bg-gray-200 dark:bg-gray-800 rounded hidden lg:block"
+                    >
+                        {theme === "light" ? "🌙" : "☀️"}
+                    </button>
+                    {user ? (
+                        <div>
+                            <img
+                                className="w-10 h-10 rounded-full cursor-pointer border border-gray-200"
+                                src={user.photoURL}
+                                alt="User Profile"
+                                title={user.displayName}
+                                onClick={toggleDropdown}
+                            />
+                            {dropdownOpen && (
+                                <div className="absolute top-full right-0 mt-2 w-40 bg-white border border-gray-200 shadow-lg rounded-md z-50">
+                                    <h4 className="text-left px-4 py-2 text-sm border-b">{user.displayName}</h4>
+                                    <button onClick={handleDashboardClick} className="w-full text-left px-4 py-2 hover:bg-gray-100">
+                                        Dashboard
+                                    </button>
+                                    <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                                        Logout
+                                    </button>
+                                </div>
+                            )}
+
                         </div>
                     ) : (
                         <div>
