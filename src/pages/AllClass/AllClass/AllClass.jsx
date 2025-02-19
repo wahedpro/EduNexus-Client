@@ -47,12 +47,12 @@ const AllClass = () => {
         }
 
         return (
-            <nav className="flex items-center justify-center gap-2 border">
+            <nav className="flex items-center justify-center gap-2">
                 {/* Previous Button */}
                 <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="px-3 py-1 border rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-3 py-1 border dark:text-white rounded disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     &lt;
                 </button>
@@ -99,7 +99,7 @@ const AllClass = () => {
                 <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className="px-3 py-1 border rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-3 py-1 border dark:text-white rounded disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     &gt;
                 </button>
@@ -108,7 +108,7 @@ const AllClass = () => {
     };
 
     return (
-        <section className="bg-gray-50 py-16">
+        <section className="bg-gray-50 py-16 dark:bg-gray-900">
             <div className="w-[95%] lg:w-[90%] mx-auto">
                 <SectionTitle
                     title="All Classes"
@@ -155,7 +155,7 @@ const AllClass = () => {
 
                 {/* Results Summary */}
                 <div className="flex justify-between items-center border p-2 my-10">
-                    <p>
+                    <p className="dark:text-white">
                         Showing {Math.min((currentPage - 1) * itemsPerPage + 1, totalClasses)} to{" "}
                         {Math.min(currentPage * itemsPerPage, totalClasses)} of {totalClasses} results
                     </p>

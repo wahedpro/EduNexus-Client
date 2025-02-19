@@ -13,6 +13,16 @@ const Navbar = () => {
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
     const [role] = useRole();
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+    useEffect(() => {
+        if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+        localStorage.setItem("theme", theme);
+    }, [theme]);
 
     const handleLogout = () => {
         userLogout()
@@ -50,9 +60,9 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className="w-full px-4 lg:px-16 mx-auto bg-white border-b-2 fixed z-50">
+        <div className="w-full px-4 lg:px-16 mx-auto bg-white border-b-2 dark:border-gray-600 fixed z-50 dark:bg-gray-900">
             <div className="flex items-center justify-between py-4">
-                <NavLink to="/" className="text-[#0048B0] text-xl lg:text-2xl font-bold">
+                <NavLink to="/" className="text-[#0048B0] text-xl lg:text-2xl font-bold dark:text-white">
                     EduNexus
                 </NavLink>
                 {/* Desktop Links */}
@@ -63,23 +73,23 @@ const Navbar = () => {
                                 ? "text-[#0048B0] font-semibold border-b-2 border-[#0048B0] dark:text-white"
                                 : "text-gray-700 hover:text-[#0048B0] dark:text-white"
                         }>Home</NavLink>
-                    <NavLink to="/AllClass" 
-                    className={({ isActive }) =>
-                        isActive
-                            ? "text-[#0048B0] font-semibold border-b-2 border-[#0048B0] dark:text-white"
-                            : "text-gray-700 hover:text-[#0048B0] dark:text-white"
-                    }>All Classes</NavLink>
-                    <NavLink to="/becomeInstructor" 
-                    className={({ isActive }) =>
-                        isActive
-                            ? "text-[#0048B0] font-semibold border-b-2 border-[#0048B0] dark:text-white"
-                            : "text-gray-700 hover:text-[#0048B0] dark:text-white"
-                    }>Teach on EduNexus</NavLink>
+                    <NavLink to="/AllClass"
+                        className={({ isActive }) =>
+                            isActive
+                                ? "text-[#0048B0] font-semibold border-b-2 border-[#0048B0] dark:text-white"
+                                : "text-gray-700 hover:text-[#0048B0] dark:text-white"
+                        }>All Classes</NavLink>
+                    <NavLink to="/becomeInstructor"
+                        className={({ isActive }) =>
+                            isActive
+                                ? "text-[#0048B0] font-semibold border-b-2 border-[#0048B0] dark:text-white"
+                                : "text-gray-700 hover:text-[#0048B0] dark:text-white"
+                        }>Teach on EduNexus</NavLink>
                 </div>
                 {/* Mobile Hamburger Menu */}
                 <div className="lg:hidden">
                     <button onClick={() => setMobileMenuOpen((prev) => !prev)} className="text-[#0048B0]">
-                        {mobileMenuOpen ? <IoIosClose size={24} /> : <IoMdMenu  size={24} />}
+                        {mobileMenuOpen ? <IoIosClose size={24} /> : <IoMdMenu size={24} />}
                     </button>
                     {mobileMenuOpen && (
                         <div className="absolute top-16 left-0 w-full bg-white shadow-lg rounded-lg z-10">
@@ -89,7 +99,13 @@ const Navbar = () => {
                         </div>
                     )}
                 </div>
-                <div className="relative" ref={dropdownRef}>
+                <div className="relative flex items-center gap-3" ref={dropdownRef}>
+                    <button
+                        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                        className="p-2 bg-gray-200 dark:bg-gray-800 rounded hidden lg:block"
+                    >
+                        {theme === "light" ? "🌙" : "☀️"}
+                    </button>
                     {user ? (
                         <div>
                             <img

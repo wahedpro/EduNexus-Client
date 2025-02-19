@@ -11,7 +11,7 @@ const Categories = () => {
     ];
 
     return (
-        <section className="bg-white pb-12">
+        <section className="bg-white pb-12 dark:bg-gray-900">
             <div className="w-[95%] lg:w-[90%] mx-auto text-center">
 
                 <SectionTitle

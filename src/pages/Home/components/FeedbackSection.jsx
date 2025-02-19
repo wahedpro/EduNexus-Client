@@ -24,7 +24,7 @@ const FeedbackSection = () => {
 
 
     return (
-        <section className="bg-gray-100 pb-10">
+        <section className="bg-gray-100 pb-10 dark:bg-gray-800">
             <div className="w-[95%] lg:w-[90%] mx-auto">
                 <SectionTitle
                     title="Teachers Feedback"

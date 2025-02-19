@@ -37,7 +37,7 @@ const FAQ = () => {
     };
 
     return (
-        <section className="bg-gray-50 pb-12">
+        <section className="bg-gray-50 pb-12 dark:bg-gray-800">
             <div className="w-[95%] lg:w-[90%] mx-auto">
 
                 <SectionTitle

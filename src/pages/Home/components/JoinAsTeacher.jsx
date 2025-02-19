@@ -3,7 +3,7 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 const JoinAsTeacher = () => {
     return (
-        <section className="bg-gray-100 pb-10">
+        <section className="bg-gray-100 pb-10 dark:bg-gray-800">
 
                 <SectionTitle
                     title="Become an Instructor"
@@ -21,10 +21,10 @@ const JoinAsTeacher = () => {
                 </div>
 
                 <div className="lg:w-1/2 text-center lg:text-left">
-                    <h2 className="text-3xl font-bold text-gray-900">
+                    <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
                         Become an Instructor
                     </h2>
-                    <p className="mt-4 text-gray-700 mb-6">
+                    <p className="mt-4 text-gray-700 mb-6 dark:text-gray-300">
                         Join a global community of educators and inspire students around
                         the world. Share your knowledge and make an impact today.
                     </p>

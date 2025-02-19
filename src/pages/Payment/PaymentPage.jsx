@@ -12,8 +12,8 @@ const PaymentPage = () => {
     const location = useLocation();
     const { classes } = location.state || {}; // Access the price from state
     return (
-        <div className="flex flex-col items-center justify-center py-32 gap-5">
-            <p className="text-xl">Complete the Payment information</p>
+        <div className="flex flex-col items-center justify-center py-44 gap-5">
+            <p className="text-xl dark:text-white">Complete the Payment information</p>
             <div className="w-[90%] lg:w-[40%] mx-auto border p-5">
                 <Elements stripe={stripePromise}>
                     <CheckoutForm classes={classes} />

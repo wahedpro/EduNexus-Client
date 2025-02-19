@@ -98,7 +98,7 @@ const CheckoutForm = ({ classes }) => {
                 }}
             />
             <button
-                className="px-5 py-2 mt-4 bg-blue-600 text-white"
+                className="px-5 py-2 mt-4 bg-[#0048B0] hover:bg-blue-400 hover:text-black text-white"
                 type="submit"
                 disabled={!stripe || !clientSecret}
             >

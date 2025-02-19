@@ -73,11 +73,11 @@ const LoginPage = () => {
     
 
     return (
-        <div className="w-[95%] lg:w-[50%] mx-auto my-10 py-10 border px-5">
+        <div className="w-[95%] lg:w-[50%] mx-auto py-24 px-5">
             <h1 className="text-2xl font-semibold text-center mb-5">Login</h1>
 
             {/* Login Form */}
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col border p-5">
                 <label>Email</label>
                 <input
                     className="p-3 border mb-5"
