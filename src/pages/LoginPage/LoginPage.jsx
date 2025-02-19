@@ -74,11 +74,11 @@ const LoginPage = () => {
 
     return (
         <div className="w-[95%] lg:w-[50%] mx-auto py-24 px-5">
-            <h1 className="text-2xl font-semibold text-center mb-5">Login</h1>
+            <h1 className="text-3xl font-semibold text-center mb-5 dark:text-white">Login</h1>
 
             {/* Login Form */}
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col border p-5">
-                <label>Email</label>
+                <label className="dark:text-white">Email</label>
                 <input
                     className="p-3 border mb-5"
                     type="email"
@@ -93,7 +93,7 @@ const LoginPage = () => {
                 />
                 {errors.email && <p className="text-red-500">{errors.email.message}</p>}
 
-                <label>Password</label>
+                <label className="dark:text-white">Password</label>
                 <div className="relative">
                     <input
                         className="p-3 border mb-5 w-full"
@@ -129,7 +129,7 @@ const LoginPage = () => {
                 >
                     {loading ? "Logging in..." : "Login with Google"}
                 </button>
-                <p className="text-center">
+                <p className="text-center dark:text-white">
                     Do not have an account? <NavLink to="/register" className="text-blue-400">Register Now</NavLink>
                 </p>
             </div>
